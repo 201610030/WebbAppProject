@@ -44,17 +44,22 @@
       <!-- Nav Item - Tables -->
       <li class="nav-item active">
         <a class="nav-link" href="tables.html">
+          <span>Dashboard</span></a>
+      </li>
+      
+      <li class="nav-item active">
+        <a class="nav-link" href="tables.html">
           <span>Transactions</span></a>
       </li>
 
       <li class="nav-item active">
         <a class="nav-link" href="tables.html">
-          <span>Monthly Budget</span></a>
+          <span>Monthly Budgets</span></a>
       </li>
 
       <li class="nav-item active">
         <a class="nav-link" href="tables.html">
-          <span>Savings Goals</span></a>
+          <span>Saving Goals</span></a>
       </li>
 
       <!-- Divider -->

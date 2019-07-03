@@ -61,7 +61,6 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <a href="google.com" class="btn card">
                   <table class = "table" width="100%" cellspacing="0">
                     <thead>
                       <tr>
@@ -87,9 +86,9 @@
                       </tr>
                     </tbody>
                   </table>
-                </a>
+                
+                  <hr>
 
-                <a href="google.com" class="btn card">
                   <table class = "table" width="100%" cellspacing="0">
                     <thead>
                       <tr>
@@ -144,7 +143,8 @@
 
                     </tbody>
                   </table>
-                </a>
+                  
+                  <hr>
 
               </div>
             </div>
