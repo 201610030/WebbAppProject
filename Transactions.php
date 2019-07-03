@@ -16,7 +16,7 @@ require "header.php";
 
     <div class="row">
 
-        <!-- Earnings (Monthly) Card Example -->
+       <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-4 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
@@ -24,6 +24,9 @@ require "header.php";
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Income</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">₱140,000</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -39,6 +42,10 @@ require "header.php";
                             <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Expense</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">₱100,000</div>
                         </div>
+                        <div class="col-auto">
+                            <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -53,6 +60,10 @@ require "header.php";
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Current Balance</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">₱40,000</div>
                         </div>
+                        <div class="col-auto">
+                            <i class="fas fa-chart-line fa-2x text-gray-300"></i>
+                        </div>
+
                     </div>
                 </div>
             </div>
