@@ -43,22 +43,26 @@
 
       <!-- Nav Item - Tables -->
       <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="Dashboard.php">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
       
       <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="Transactions.php">
+            <i class="fas fa-fw fa-table"></i>
           <span>Transactions</span></a>
       </li>
 
       <li class="nav-item active">
         <a class="nav-link" href="tables.html">
+            <i class="fas fa-fw fa-wallet"></i>
           <span>Monthly Budgets</span></a>
       </li>
 
       <li class="nav-item active">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="SavingGoals.php">
+            <i class="fas fa-fw fa-piggy-bank"></i>
           <span>Saving Goals</span></a>
       </li>
 

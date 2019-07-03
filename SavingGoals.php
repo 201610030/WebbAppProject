@@ -34,7 +34,7 @@ require "header.php";
                             <tr>
                                 <td><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning">
                                         <i class="fas fa-edit fa-sm text-white-50"></i>
-                                    </a
+                                    </a>
                                     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger">
                                         <i class="fas fa-trash fa-sm text-white-50"></i>
                                     </a>
@@ -48,7 +48,7 @@ require "header.php";
                             <tr>
                                 <td><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning">
                                         <i class="fas fa-edit fa-sm text-white-50"></i>
-                                    </a
+                                    </a>
                                     <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger">
                                         <i class="fas fa-trash fa-sm text-white-50"></i>
                                     </a>
