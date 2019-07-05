@@ -31,7 +31,6 @@ if ($query->num_rows > 0) {
     if ($userinfo['status'] == 1) {
 
         if ($userinfo['is_verify'] == 1) {
-            $accounts_id = $userinfo['id'];
             $_SESSION['userid'] = $userinfo['id'];
             $_SESSION['fname'] = $userinfo['fname'];
             $_SESSION['lname'] = $userinfo['lname'];
