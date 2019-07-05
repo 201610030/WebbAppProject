@@ -1,6 +1,6 @@
 <?php
 
-require 'files/dbconnection.php';
+require 'dbconnection.php';
 require 'sendemail.php';
 
 $fname = strip_tags($_POST['fname']);
@@ -21,7 +21,7 @@ if ($pword != $cpword) {
 } else {
     $mail->Subject = "Registration";
     $mail->Body = "<h2>Hello $fname, <br><br>Please verify your account by clicking the link below: </h2>"
-            . "<a href='localhost/project/verifyuser.php?vcode=$vcode'>CLICK HERE</a>"; //Content of Message : to set the content of email message
+            . "<a href='localhost/WebbAppProject/verifyuser.php?vcode=$vcode'>CLICK HERE</a>"; //Content of Message : to set the content of email message
 
     $mail->AddAddress($email);
     if (!$mail->Send()) {
