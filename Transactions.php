@@ -102,7 +102,7 @@ $total = $totalIncome - $totalExpense;
 <div class="container-fluid">
     
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Saving Goals</h1>
+        <h1 class="h3 mb-0 text-gray-800">Transactions</h1>
         <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" data-toggle="modal" data-target="#myModal">
          <i class="fas fa-plus fa-sm text-white-50"></i> Create new transaction</button>
 

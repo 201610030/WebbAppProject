@@ -2,18 +2,16 @@
 
 require 'dbconnection.php';
 
-$trans_id = $_GET['trans_id'];
+$id = $_GET['id'];
 
-$dateArr = explode("-", $_POST['date']);
+$name = strip_tags($_POST['savings_desc']);
+$current_amt = strip_tags($_POST['current_amt']);
+$target_amt = strip_tags($_POST['target_amt']);
+$target_date = strip_tags($_POST['target_date']);
 
-$year = $dateArr[0];
-$month = $dateArr[1];
-$day = $dateArr[2];
-$amount = strip_tags($_POST['amount']);
-$contents = strip_tags($_POST['contents']);
-$account = strip_tags($_POST['account']);
-$category = strip_tags($_POST['category']);
 
-$db->query("UPDATE transactions SET month = '$month', day = '$day',year = '$year',account = '$account',contents = '$contents',amount = '$amount',category = '$category' where transaction_id = '$trans_id'") or die($db->error);
 
-echo "<script>alert('Transaction Edit Success'); location.href='Transactions.php'</script>";
+$db->query("UPDATE savings SET savings_desc = '$name', current_amt = '$current_amt', "
+        . " target_amt='$target_amt', target_date='$target_date' where savings_id = '$id'") or die($db->error);
+
+echo "<script>alert('Edit Success'); location.href='SavingGoals.php'</script>";

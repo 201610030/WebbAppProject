@@ -114,7 +114,7 @@
 
                             <li class="nav-item" style="padding-left: 10px">
                                 <a href="SavingGoals.php" class="btn btn-info">
-                                    <span>Saving goals</span>
+                                    <span>Saving Goals</span>
                                 </a>
                             </li>
 
