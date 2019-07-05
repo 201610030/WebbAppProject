@@ -52,7 +52,7 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-                
+
                 <li class="nav-item active">
                     <a class="nav-link" href="Transactions.php">
                         <i class="fas fa-fw fa-table"></i>
@@ -66,6 +66,24 @@
                 </li>
 
                 <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
+
+                <div class="sidebar-heading">
+                    addons
+                </div>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="ImportCSV.php">
+                        <i class="fas fa-fw fa-upload"></i>
+                        <span>Import .CSV</span></a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="SavingGoals.php">
+                        <i class="fas fa-fw fa-download"></i>
+                        <span>Export .CSV</span></a>
+                </li>
+
                 <hr class="sidebar-divider d-none d-md-block">
 
                 <!-- Sidebar Toggler (Sidebar) -->
@@ -97,12 +115,6 @@
                             <li class="nav-item" style="padding-left: 10px">
                                 <a href="Transactions.php" class="btn btn-info">
                                     <span>Transactions</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item" style="padding-left: 10px">
-                                <a href="" class="btn btn-info">
-                                    <span>Monthly Budget</span>
                                 </a>
                             </li>
 
