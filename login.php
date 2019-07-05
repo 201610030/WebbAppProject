@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['login']) == TRUE) {
-    header("Location: transactions.php");
+    header("Location: Transactions.php");
 }
 ?>
 
