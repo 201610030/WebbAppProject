@@ -3,6 +3,12 @@ $title = "Transactions";
 require "header.php";
 require 'dbconnection.php';
 
+session_start();
+
+if (isset($_SESSION['login']) == FALSE) {
+    header("Location: login.php");
+}
+
 if (isset($_GET['month'])) {
     $month = $_GET['month'];
     $action = $_GET['action'];

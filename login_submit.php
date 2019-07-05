@@ -9,7 +9,7 @@ session_start();
  * $_SESSION
  *  */
 
-require 'files/dbconnection.php';
+require 'dbconnection.php';
 $username = $_POST['uname'];
 $password = $_POST['pword'];
 
@@ -19,7 +19,7 @@ if($query->num_rows > 0){
     
     $userinfo = $query->fetch_assoc();
     
-    if($userinfo['status'] == 1){
+    if($userinfo['status'] == 0){
         
         if($userinfo['is_verify'] == 1){
             $_SESSION['userid'] = $userinfo['id'];

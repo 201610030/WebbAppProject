@@ -1,6 +1,6 @@
 <?php
     
-require 'files/dbconnection.php';
+require 'dbconnection.php';
 
 $verification = $_GET['vcode'];
 
