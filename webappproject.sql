@@ -36,8 +36,8 @@ CREATE TABLE `accounts` (
   `lname` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
   `vcode` varchar(30) NOT NULL,
-  `is_verify` int(1) NOT NULL,
-  `status` int(1) NOT NULL
+  `is_verify` int(1) NOT NULL DEFAULT '0',
+  `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
