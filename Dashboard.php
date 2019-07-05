@@ -103,10 +103,19 @@ $slice_expense = $expense_data->fetch_assoc();
 $income = $slice_income['income_data'];  
 $expense = $slice_expense['expense_data'];
 
-$income_expense_list = array($income, $expense);  
-$slices_income_expenses = json_encode($income_expense_list);
 
 $total = $income + $expense; 
+$percentage_income = ($income / $total) * 100; 
+$percentage_expense = ($expense / $total) * 100;
+
+$float_inc =  number_format((float)$percentage_income, 2, '.', '');
+$float_exp =  number_format((float)$percentage_expense, 2, '.', '');
+
+
+$income_expense_list = array($float_inc, $float_exp);  
+$slices_income_expenses = json_encode($income_expense_list);
+
+
 
 
 ////////////////////////////////////////
@@ -717,7 +726,7 @@ var myLineChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return '₱' + number_format(value);
           }
         },
         gridLines: {
@@ -749,7 +758,7 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ₱' + number_format(tooltipItem.yLabel);
         }
       }
     }
@@ -840,7 +849,7 @@ var myLineChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return '₱' + number_format(value);
           }
         },
         gridLines: {
@@ -872,7 +881,7 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ₱' + number_format(tooltipItem.yLabel);
         }
       }
     }
@@ -958,7 +967,7 @@ var myBarChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return '₱' + number_format(value);
           }
         },
         gridLines: {
@@ -988,7 +997,7 @@ var myBarChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return datasetLabel + ': $' + number_format(tooltipItem.yLabel);
+          return datasetLabel + ': ₱' + number_format(tooltipItem.yLabel);
         }
       }
     },
