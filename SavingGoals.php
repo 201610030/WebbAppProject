@@ -9,6 +9,8 @@ if (isset($_SESSION['login']) == FALSE) {
 $title = "Saving Goals";
 require "header.php";
 require 'dbconnection.php';
+
+$accounts_id = $_SESSION['userid'];
 ?>
 
 <!-- Begin Page Content -->
@@ -224,16 +226,15 @@ require 'dbconnection.php';
                                    class="form-control">
                         </div>
                     </div> 
-                            
                     
-                    <small class="float-right">* required</small>
+                    <small>* required</small>
 
                 </div>
-            </form>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button name="submit" type="submit" class="btn btn-primary">Submit</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

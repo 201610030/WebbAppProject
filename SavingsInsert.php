@@ -18,6 +18,7 @@ if ($_POST['target_amt'] < 1 or $_POST['current_amt'] < 0) {
     $current_amt = strip_tags($_POST['current_amt']);
     $target_amt = strip_tags($_POST['target_amt']);
     $target_date = strip_tags($_POST['target_date']);
+    $accounts_id = $_SESSION['userid'];
 
     $db->query("INSERT into savings (accounts_id,savings_desc,current_amt,target_amt,target_date) "
                     . "VALUES ('$accounts_id','$name', '$current_amt', '$target_amt', '$target_date')") or die($db->error);
