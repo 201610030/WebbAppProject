@@ -74,6 +74,18 @@ require 'dbconnection.php';
                                     ?>
                                 </td>
                             </tr>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td colspan="2">
+                                    <?php
+                                    $percent = ($current_amt / $target_amt) * 100;
+                                    ?>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: <?=$percent?>%" aria-valuenow="<?= $percent?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
 
 
                             <!--

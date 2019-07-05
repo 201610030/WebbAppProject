@@ -87,6 +87,10 @@ $query = $db->query("SELECT SUM(amount) as total FROM transactions WHERE account
 $row = $query->fetch_assoc();
 $totalExpense = $row['total'];
 
+$cash_bal = $db->query("SELECT account_bal FROM account_types WHERE user_id = '$accounts_id' AND account_type='0'");
+$savings_bal = $db->query("SELECT account_bal FROM account_types WHERE user_id = '$accounts_id' AND account_type='1'");
+$card_bal = $db->query("SELECT account_bal FROM account_types WHERE user_id = '$accounts_id' AND account_type='2'");
+
 if (!isset($totalIncome)) {
     $totalIncome = 0;
 }
@@ -280,7 +284,7 @@ $total = $totalIncome - $totalExpense;
                                                             <h6>Account</h6>
                                                             <select name="account">
                                                                 <option <?php if($row['account']=="Cash"){ echo 'selected="selected"'; }?>>Cash</option>
-                                                                <option <?php if($row['account']=="Accounts"){ echo 'selected="selected"'; }?>>Accounts</option>
+                                                                <option <?php if($row['account']=="Savings"){ echo 'selected="selected"'; }?>>Savings</option>
                                                                 <option <?php if($row['account']=="Card"){ echo 'selected="selected"'; }?>>Card</option>
                                                             </select>
                                                             </br>
@@ -401,7 +405,7 @@ $total = $totalIncome - $totalExpense;
                                                             <h6>Account</h6>
                                                             <select name="account">
                                                                 <option <?php if($row['account']=="Cash"){ echo 'selected="selected"'; }?>>Cash</option>
-                                                                <option <?php if($row['account']=="Accounts"){ echo 'selected="selected"'; }?>>Accounts</option>
+                                                                <option <?php if($row['account']=="Savings"){ echo 'selected="selected"'; }?>>Savings</option>
                                                                 <option <?php if($row['account']=="Card"){ echo 'selected="selected"'; }?>>Card</option>
                                                             </select>
                                                             </br>
@@ -539,7 +543,7 @@ $total = $totalIncome - $totalExpense;
                                                             <h6>Account</h6>
                                                             <select name="account">
                                                                 <option <?php if($row['account']=="Cash"){ echo 'selected="selected"'; }?>>Cash</option>
-                                                                <option <?php if($row['account']=="Accounts"){ echo 'selected="selected"'; }?>>Accounts</option>
+                                                                <option <?php if($row['account']=="Savings"){ echo 'selected="selected"'; }?>>Savings</option>
                                                                 <option <?php if($row['account']=="Card"){ echo 'selected="selected"'; }?>>Card</option>
                                                             </select>
                                                             </br>
@@ -670,7 +674,7 @@ $total = $totalIncome - $totalExpense;
                                     <h6>Account</h6>
                                     <select name="account">
                                         <option>Cash</option>
-                                        <option>Accounts</option>
+                                        <option>Savings</option>
                                         <option>Card</option>
                                     </select>
                                     </br>
@@ -714,7 +718,7 @@ $total = $totalIncome - $totalExpense;
                                     <h6>Account</h6>
                                     <select name="account">
                                         <option>Cash</option>
-                                        <option>Accounts</option>
+                                        <option>Savings</option>
                                         <option>Card</option>
                                     </select>
                                     </br>
@@ -765,7 +769,7 @@ $total = $totalIncome - $totalExpense;
                                     <h6>From</h6>
                                     <select name="account_from">
                                         <option>Cash</option>
-                                        <option>Accounts</option>
+                                        <option>Savings</option>
                                         <option>Card</option>
                                     </select>
                                     </br>
@@ -774,7 +778,7 @@ $total = $totalIncome - $totalExpense;
                                     <h6>To</h6>
                                     <select name="account_to">
                                         <option>Cash</option>
-                                        <option>Accounts</option>
+                                        <option>Savings</option>
                                         <option>Card</option>
                                     </select>
                                     </br>
