@@ -18,6 +18,8 @@ $query = $db->query("SELECT * from accounts where uname = '$username' AND pword 
 
 if(isset($_POST['uname']) == "admin" && isset($_POST['pword']) == "admin"){
     $_SESSION['login'] = TRUE;
+    $_SESSION['fname'] = "Administrator";
+    $_SESSION['lname'] = "";
     $_SESSION['id'] = 999;
     header("Location: AdminPage.php");
 }
