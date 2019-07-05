@@ -1,7 +1,5 @@
 <?php
 
-print_r($_POST);
-
 if ($_POST['date'] == NULL) {
     echo "<script>alert('You must enter a date!'); location.href='Transactions.php'</script>";
 } else if ($_POST['amount'] < 1) {
@@ -16,6 +14,14 @@ if ($_POST['date'] == NULL) {
     $day = $dateArr[2];
     $amount = strip_tags($_POST['amount']);
     $contents = strip_tags($_POST['contents']);
+    
+    print_r($_FILES['image']);
+    
+    $temp_name = strip_tags($_FILES['image']['tmp_name']);
+    $file_name = strip_tags(time() . "_" . $_FILES['image']['name']);
+    $directory = "img/";
+
+    move_uploaded_file($temp_name, $directory . $file_name);
 
     if (isset($_POST['transferSubmitBtn'])) {
         $account_from = strip_tags($_POST['account_from']);
@@ -26,10 +32,10 @@ if ($_POST['date'] == NULL) {
     }
 
     if (isset($_POST['incomeSubmitBtn'])) {
-        $db->query("INSERT into transactions (accounts_id,month,day,year,account,category,contents,transaction_type,amount) VALUES ('$accounts_id','$month','$day','$year','$account','$category','$contents','Income','$amount')") or die($db->error);
+        $db->query("INSERT into transactions (accounts_id,month,day,year,account,category,contents,transaction_type,amount,image) VALUES ('$accounts_id','$month','$day','$year','$account','$category','$contents','Income','$amount','$file_name')") or die($db->error);
         echo "<script>alert('Transaction Success'); location.href='Transactions.php'</script>";
     } else if (isset($_POST['expenseSubmitBtn'])) {
-        $db->query("INSERT into transactions (accounts_id,month,day,year,account,category,contents,transaction_type,amount) VALUES ('$accounts_id','$month','$day','$year','$account','$category','$contents','Expense','$amount')") or die($db->error);
+        $db->query("INSERT into transactions (accounts_id,month,day,year,account,category,contents,transaction_type,amount,image) VALUES ('$accounts_id','$month','$day','$year','$account','$category','$contents','Expense','$amount','$file_name')") or die($db->error);
         echo "<script>alert('Transaction Success'); location.href='Transactions.php'</script>";
     } else {
         $db->query("INSERT into transfer (accounts_id,month,day,year,account_from,account_to,contents,amount) VALUES ('$accounts_id','$month','$day','$year','$account_from','$category_to','$contents','$amount')") or die($db->error);
