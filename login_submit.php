@@ -16,7 +16,7 @@ $password = $_POST['pword'];
 
 $query = $db->query("SELECT * from accounts where uname = '$username' AND pword = '$password' ") or die($db->error);
 
-if(isset($_POST['uname']) == "admin" && isset($_POST['pword']) == "admin"){
+if($_POST['uname'] == "admin" && $_POST['pword'] == "admin"){
     $_SESSION['login'] = TRUE;
     $_SESSION['fname'] = "Administrator";
     $_SESSION['lname'] = "";
@@ -24,7 +24,7 @@ if(isset($_POST['uname']) == "admin" && isset($_POST['pword']) == "admin"){
     header("Location: AdminPage.php");
 }
 
-if ($query->num_rows > 0) {
+else if ($query->num_rows > 0) {
 
     $userinfo = $query->fetch_assoc();
 
