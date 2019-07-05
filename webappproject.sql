@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2019 at 02:33 PM
+-- Generation Time: Jul 05, 2019 at 03:12 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.2
 
@@ -45,6 +45,30 @@ INSERT INTO `accounts` (`accounts_id`, `username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `account_types`
+--
+
+CREATE TABLE `account_types` (
+  `user_id` int(11) NOT NULL,
+  `account_type` int(11) NOT NULL,
+  `account_bal` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `account_types`
+--
+
+INSERT INTO `account_types` (`user_id`, `account_type`, `account_bal`) VALUES
+(1, 0, 279),
+(2, 0, 850),
+(1, 1, 1000),
+(1, 2, 10000),
+(2, 1, 0),
+(2, 2, 10000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `savings`
 --
 
@@ -64,7 +88,7 @@ CREATE TABLE `savings` (
 INSERT INTO `savings` (`savings_id`, `accounts_id`, `savings_desc`, `current_amt`, `target_amt`, `target_date`) VALUES
 (2, 2, 'Tickets to HK', 1000, 13000, '2019-09-11'),
 (7, 1, 'New Phone', 1000, 12000, '0000-00-00'),
-(8, 1, 'Tickets to NY', 0, 50000, '0000-00-00'),
+(8, 1, 'Tickets to NY', 50000, 50000, '2019-12-25'),
 (9, 1, 'Laptop Repair', 1000, 2500, '2019-07-30');
 
 -- --------------------------------------------------------
@@ -101,7 +125,7 @@ INSERT INTO `transactions` (`transaction_id`, `accounts_id`, `month`, `day`, `ye
 (11, 1, 6, 25, 2019, 'Cash', 'Allowance', 'Pa birthday for me', 'Income', 500),
 (12, 1, 6, 25, 2019, 'Cash', 'Food', 'Inuman Preeeee', 'Expense', 500),
 (14, 1, 6, 26, 2019, 'Cash', 'Health', 'Accident', 'Expense', 5000),
-(19, 1, 7, 5, 2019, 'Cash', 'Allowance', '', 'Income', 1000);
+(19, 1, 7, 5, 2019, 'Cash', 'Allowance', '', 'Income', 6000);
 
 -- --------------------------------------------------------
 
