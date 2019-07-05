@@ -35,7 +35,7 @@ else if ($query->num_rows > 0) {
             $_SESSION['fname'] = $userinfo['fname'];
             $_SESSION['lname'] = $userinfo['lname'];
             $_SESSION['login'] = TRUE;
-            header("Location: Transactions.php");
+            header("Location: Dashboard.php");
         } else {
             echo "<script>alert('You are not yet verified! Please check your email to confirm your account'); location.href='login.php'</script>";
         }
