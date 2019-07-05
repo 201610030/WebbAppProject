@@ -60,12 +60,6 @@
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">
-                        <i class="fas fa-fw fa-wallet"></i>
-                        <span>Monthly Budget</span></a>
-                </li>
-
-                <li class="nav-item active">
                     <a class="nav-link" href="SavingGoals.php">
                         <i class="fas fa-fw fa-coins"></i>
                         <span>Saving Goals</span></a>
