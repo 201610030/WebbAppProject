@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.7
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2019 at 03:12 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.2
+-- Generation Time: Jul 05, 2019 at 03:24 PM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -29,18 +29,24 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `accounts` (
-  `accounts_id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `id` int(11) NOT NULL,
+  `uname` varchar(30) NOT NULL,
+  `pword` varchar(30) NOT NULL,
+  `fname` varchar(30) NOT NULL,
+  `lname` varchar(30) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `vcode` varchar(30) NOT NULL,
+  `is_verify` int(1) NOT NULL,
+  `status` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`accounts_id`, `username`, `password`) VALUES
-(1, 'bryan', 'aaa'),
-(2, 'kiel', 'bbb');
+INSERT INTO `accounts` (`id`, `uname`, `pword`, `fname`, `lname`, `email`, `vcode`, `is_verify`, `status`) VALUES
+(1, 'bryan', 'aaa', 'Bryan', 'Edejer', 'be@yahoo.com', '', 0, 0),
+(2, 'kiel', 'bbb', 'Kiel', 'Quitain', 'kq@gmail.com', '', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -76,7 +82,7 @@ CREATE TABLE `savings` (
   `savings_id` int(11) NOT NULL,
   `accounts_id` int(11) NOT NULL,
   `savings_desc` varchar(100) NOT NULL,
-  `current_amt` double NOT NULL DEFAULT '0',
+  `current_amt` double NOT NULL DEFAULT 0,
   `target_amt` double NOT NULL,
   `target_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -88,7 +94,7 @@ CREATE TABLE `savings` (
 INSERT INTO `savings` (`savings_id`, `accounts_id`, `savings_desc`, `current_amt`, `target_amt`, `target_date`) VALUES
 (2, 2, 'Tickets to HK', 1000, 13000, '2019-09-11'),
 (7, 1, 'New Phone', 1000, 12000, '0000-00-00'),
-(8, 1, 'Tickets to NY', 50000, 50000, '2019-12-25'),
+(8, 1, 'Tickets to NY', 0, 50000, '0000-00-00'),
 (9, 1, 'Laptop Repair', 1000, 2500, '2019-07-30');
 
 -- --------------------------------------------------------
@@ -107,25 +113,27 @@ CREATE TABLE `transactions` (
   `category` text NOT NULL,
   `contents` varchar(100) NOT NULL,
   `transaction_type` text NOT NULL,
-  `amount` double NOT NULL
+  `amount` double NOT NULL,
+  `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transactions`
 --
 
-INSERT INTO `transactions` (`transaction_id`, `accounts_id`, `month`, `day`, `year`, `account`, `category`, `contents`, `transaction_type`, `amount`) VALUES
-(1, 1, 7, 3, 2019, 'Cash', 'Food', 'lunch', 'Expense', 50),
-(4, 2, 7, 1, 2019, 'Card', 'Allowance', '1 week baon', 'Income', 1000),
-(5, 2, 7, 3, 2019, 'Card', 'Food', 'lunch', 'Expense', 150),
-(6, 1, 7, 4, 2019, 'Cash', 'Petty cash', 'bigay ni tropa', 'Income', 100),
-(7, 1, 7, 4, 2019, 'Cash', 'Health', 'medical', 'Expense', 901),
-(8, 1, 7, 4, 2019, 'Cash', 'Allowance', 'baon', 'Income', 150),
-(9, 1, 7, 4, 2019, 'Cash', 'Social Life', 'Pang DOTA', 'Expense', 20),
-(11, 1, 6, 25, 2019, 'Cash', 'Allowance', 'Pa birthday for me', 'Income', 500),
-(12, 1, 6, 25, 2019, 'Cash', 'Food', 'Inuman Preeeee', 'Expense', 500),
-(14, 1, 6, 26, 2019, 'Cash', 'Health', 'Accident', 'Expense', 5000),
-(19, 1, 7, 5, 2019, 'Cash', 'Allowance', '', 'Income', 6000);
+INSERT INTO `transactions` (`transaction_id`, `accounts_id`, `month`, `day`, `year`, `account`, `category`, `contents`, `transaction_type`, `amount`, `image`) VALUES
+(1, 1, 7, 3, 2019, 'Cash', 'Food', 'lunch', 'Expense', 50, ''),
+(2, 1, 7, 3, 2019, 'Cash', 'Food', 'dinner', 'Expense', 50, ''),
+(4, 2, 7, 1, 2019, 'Card', 'Allowance', '1 week baon', 'Income', 1000, ''),
+(5, 2, 7, 3, 2019, 'Card', 'Food', 'lunch', 'Expense', 150, ''),
+(6, 1, 7, 4, 2019, 'Cash', 'Petty cash', 'bigay ni tropa', 'Income', 500, ''),
+(8, 1, 7, 4, 2019, 'Cash', 'Allowance', 'baon', 'Income', 150, ''),
+(9, 1, 7, 4, 2019, 'Cash', 'Social Life', 'Pang DOTA', 'Expense', 20, ''),
+(11, 1, 6, 25, 2019, 'Cash', 'Allowance', 'Pa birthday for me', 'Income', 500, ''),
+(12, 1, 6, 25, 2019, 'Cash', 'Food', 'Inuman Preeeee', 'Expense', 500, ''),
+(14, 1, 6, 26, 2019, 'Cash', 'Health', 'Accident', 'Expense', 5000, ''),
+(18, 1, 7, 2, 2019, 'Accounts', 'Food', 'chocolate', 'Expense', 150, ''),
+(31, 1, 7, 5, 2019, 'Cash', 'Food', 'Apple', 'Expense', 20, '1562332275_apple.jpg');
 
 -- --------------------------------------------------------
 
@@ -159,7 +167,7 @@ INSERT INTO `transfer` (`accounts_id`, `month`, `day`, `year`, `account_from`, `
 -- Indexes for table `accounts`
 --
 ALTER TABLE `accounts`
-  ADD PRIMARY KEY (`accounts_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `savings`
@@ -181,7 +189,7 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `accounts_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `savings`
@@ -193,7 +201,7 @@ ALTER TABLE `savings`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
