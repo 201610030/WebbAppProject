@@ -35,7 +35,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
@@ -47,18 +47,28 @@
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" href="Dashboard.php">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item active">
+                    <a class="nav-link" href="Transactions.php">
+                        <i class="fas fa-fw fa-table"></i>
                         <span>Transactions</span></a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-fw fa-wallet"></i>
                         <span>Monthly Budget</span></a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="tables.html">
-                        <span>Savings Goals</span></a>
+                    <a class="nav-link" href="SavingGoals.php">
+                        <i class="fas fa-fw fa-coins"></i>
+                        <span>Saving Goals</span></a>
                 </li>
 
                 <!-- Divider -->
@@ -91,20 +101,20 @@
 
                             <!-- Nav Item - User Information -->
                             <li class="nav-item" style="padding-left: 10px">
-                                <a href="#" class="btn btn-info">
+                                <a href="Transactions.php" class="btn btn-info">
                                     <span>Transactions</span>
                                 </a>
                             </li>
 
                             <li class="nav-item" style="padding-left: 10px">
-                                <a href="#" class="btn btn-info">
-                                    <span>Montly Budget</span>
+                                <a href="" class="btn btn-info">
+                                    <span>Monthly Budget</span>
                                 </a>
                             </li>
 
                             <li class="nav-item" style="padding-left: 10px">
-                                <a href="#" class="btn btn-info">
-                                    <span>Savings goals</span>
+                                <a href="SavingGoals.php" class="btn btn-info">
+                                    <span>Saving goals</span>
                                 </a>
                             </li>
 

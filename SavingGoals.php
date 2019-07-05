@@ -1,6 +1,7 @@
 <?php
 $title = "Saving Goals";
 require "header.php";
+require 'dbconnection.php';
 ?>
 
 <!-- Begin Page Content -->
@@ -19,56 +20,118 @@ require "header.php";
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                    <table class = "table" width="100%" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th>Actions</th>
-                                <th>Piggy Bank</th>
-                                <th>Saved So Far</th>
-                                <th></th>
-                                <th>Target Amount</th>
-                                <th>Target Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning">
-                                        <i class="fas fa-edit fa-sm text-white-50"></i>
-                                    </a>
-                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger">
-                                        <i class="fas fa-trash fa-sm text-white-50"></i>
-                                    </a>
-                                </td>
-                                <td>New Phone</td>
-                                <td>₱ 5,000</td>
-                                <td></td>
-                                <td>₱25,000</td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td><a href="#" class="d-none d-sm-inline-block btn btn-sm btn-warning">
-                                        <i class="fas fa-edit fa-sm text-white-50"></i>
-                                    </a>
-                                    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-danger">
-                                        <i class="fas fa-trash fa-sm text-white-50"></i>
-                                    </a>
-                                </td>
-                                <td>CebuPac Tickets</td>
-                                <td>₱ 2,000</td>
-                                <td></td>
-                                <td>₱12,000</td>
-                                <td>09/10/2019</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                 
+                <table class = "table" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Actions</th>
+                            <th>Piggy Bank</th>
+                            <th>Saved So Far</th>
+                            <th></th>
+                            <th>Target Amount</th>
+                            <th>Target Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $query = $db->query("SELECT * FROM savings WHERE accounts_id = " . $accounts_id . " "
+                                . "ORDER BY target_date ASC") or die($db->error);
 
+                        while ($row = $query->fetch_assoc()):
+                            $target_date = NULL;
+
+                            if ($row['target_date'] != NULL) {
+                                $timestamp = strtotime($row['target_date']);
+                                $target_date = date("M j Y", $timestamp);
+                            }
+                            $id = $row['savings_id'];
+                            $name = $row['savings_desc'];
+                            $current_amt = $row['current_amt'];
+                            $target_amt = $row['target_amt'];
+                            $modal = 'MyModal' . $id;
+                            ?>
+
+                            <tr>
+                                <td><button type="button" data-toggle="modal" data-target="#<?= $modal ?>"
+                                            class="d-none d-sm-inline-block btn btn-sm btn-warning">
+                                        <i class="fas fa-edit fa-sm text-white-50"></i>
+                                    </button>
+                                    <a onclick='javascript:return confirm("Are you sure you want to delete?");'
+                                       href="SavingsDelete.php?id=<?= $id ?>" 
+                                       class="d-none d-sm-inline-block btn btn-sm btn-danger">
+                                        <i class="fas fa-trash fa-sm text-white-50"></i>
+                                    </a>
+                                </td>
+                                <td><?= $name ?></td>
+                                <td>₱ <?= number_format($current_amt) ?></td>
+                                <td>
+                                    <?php
+                                    $percent = ($current_amt / $target_amt) * 100;
+                                    ?>
+                                    <div class="progress mb-4">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: <?= $percent ?>%" aria-valuenow="<?= $percent ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </td>
+                                <td>₱ <?= number_format($target_amt) ?></td>
+                                <td><?php
+                                    if ($target_date != NULL) {
+                                        print($target_date);
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+
+                            <?php
+                        endwhile;
+                        ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
 </div>
 <!-- /.container-fluid -->
+
+<div class="modal fade" id="<?= $modal ?>" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Edit Piggy Bank</h3>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form action="SavingsEdit.php?id=<?= $id ?>" method="POST">
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label" for="savings_desc">Piggy Bank Name</label> 
+                        <div class="col-8">
+                            <input id="savings_desc" name="savings_desc" type="text" 
+                                   required="required" class="form-control" value="<?= $name ?>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="target_amt" class="col-4 col-form-label">Target Amount</label> 
+                        <div class="col-8">
+                            <input id="target_amt" name="target_amt" type="number" 
+                                   required="required" class="form-control" value="<?= $target_amt ?>">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="current_amt" class="col-4 col-form-label">Current Amount</label> 
+                        <div class="col-8">
+                            <input id="current_amt" name="current_amt" type="number" 
+                                   class="form-control" required="required" value="<?= $current_amt ?>">
+                        </div>
+                    </div> 
+                    <div class="form-group row">
+                        <div class="offset-4 col-8">
+                            <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php
 require "footer.php";

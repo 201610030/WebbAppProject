@@ -100,6 +100,13 @@ $total = $totalIncome - $totalExpense;
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Saving Goals</h1>
+        <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" data-toggle="modal" data-target="#myModal">
+         <i class="fas fa-plus fa-sm text-white-50"></i> Create new transaction</button>
+
+    </div>
 
     <!-- Page Heading -->
 
@@ -111,8 +118,11 @@ $total = $totalIncome - $totalExpense;
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Income</div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Income</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">₱<?= $totalIncome ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -125,8 +135,11 @@ $total = $totalIncome - $totalExpense;
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Expense</div>
+                            <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Total Expense</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">₱<?= $totalExpense ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-shopping-cart fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -139,8 +152,11 @@ $total = $totalIncome - $totalExpense;
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total</div>
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Current Balance</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">₱<?= $total ?></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-chart-line fa-2x text-gray-300"></i>
                         </div>
                     </div>
                 </div>
@@ -150,19 +166,22 @@ $total = $totalIncome - $totalExpense;
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
-        <div class="card-header py-3">
+        <div class="card-header py-3 ">
 
-            <h6 class="m-0 font-weight-bold text-primary">
-                <a href="Transactions.php?month=<?= $month ?>&year=<?= $year ?>&action=prev" class="btn btn-info">PREV</a>
+            <h6 class="m-0 font-weight-bold text-primary d-flex justify-content-between">
+                <a href="Transactions.php?month=<?= $month ?>&year=<?= $year ?>&action=prev" class="btn btn-sm btn-info">
+                    <i class="fas fa-sm fa-chevron-left text-white-50"></i> Previous</a>
 
                 <?= $month . ' ' . $year ?>
 
-                <a href="Transactions.php?month=<?= $month ?>&year=<?= $year ?>&action=next" class="btn btn-info">NEXT</a>
+                <a href="Transactions.php?month=<?= $month ?>&year=<?= $year ?>&action=next" class="btn btn-sm btn-info">
+                    Next <i class="fas fa-chevron-right fa-sm text-white-50"></i></a>
             </h6>
         </div>
         <div class="card-body">
             <?php
-            $query = $db->query("SELECT * FROM transactions WHERE accounts_id = " . $accounts_id . " AND month = " . date("n", strtotime($month)) . " AND year = " . $year . " ORDER BY day ASC;") or die($db->error);
+            $query = $db->query("SELECT * FROM transactions WHERE accounts_id = " . $accounts_id . " "
+                    . "AND month = " . date("n", strtotime($month)) . " AND year = " . $year . " ORDER BY day ASC;") or die($db->error);
 
             $ctr = 0;
 
@@ -193,11 +212,11 @@ $total = $totalIncome - $totalExpense;
                     $day = $row['day'];
                     ?>
 
-                    <div class="card table-responsive">
+                    <div class="card table-responsive my-3">
                         <table class = "table" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th width='16.67%'><?= $day ?></th>
+                                    <th width='16.67%'><h4 class="text-info"><?= $month . ' ' . $day ?></h2></th>
                                     <th width='16.67%'></th>
                                     <th width='16.67%'></th>
                                     <th width='16.67%'></th>
@@ -222,7 +241,7 @@ $total = $totalIncome - $totalExpense;
                                     if ($row['transaction_type'] == 'Income') {
                                         $edit_type = 'editIncomeBtn';
                                         ?>
-                                        <td width="14%" style="color:blue">
+                                        <td width="14%" class="text-primary">
                                             ₱<?= $row['amount'] ?>
                                         </td>
                                         <td>
@@ -233,14 +252,15 @@ $total = $totalIncome - $totalExpense;
                                         ?>
                                         <td>
                                         </td>
-                                        <td width="14%" style="color:red">
+                                        <td width="14%" class="text-danger">
                                             ₱<?= $row['amount'] ?>
                                         </td>
                                         <?php
                                     }
                                     ?>
                                     <td>
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#<?= $modalName ?>">EDIT</button>
+                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#<?= $modalName ?>">
+                                            <i class="fas fa-edit fa-sm text-white-50"></i></button>
                                         <div class="modal fade" id="<?= $modalName ?>" role="dialog">
                                             <div class="modal-dialog">
                                                 <!-- Modal content-->
@@ -307,7 +327,7 @@ $total = $totalIncome - $totalExpense;
                                                             </br>
                                                             </br>
 
-                                                            <input class="btn btn-success" type="submit" name="<?= $edit_type ?>" value="Save"/>
+                                                            <input class="btn btn-primary" type="submit" name="<?= $edit_type ?>" value="Save"/>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
@@ -318,7 +338,9 @@ $total = $totalIncome - $totalExpense;
                                             </div>
                                         </div>
 
-                                        <a href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">DELETE</a>
+                                        <a onclick='javascript:return confirm("Are you sure you want to delete?");'
+                                            href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
+                                        <i class="fas fa-trash fa-sm text-white-50"></i></a>
                                     </td>
                                 </tr>
 
@@ -340,7 +362,7 @@ $total = $totalIncome - $totalExpense;
                                     if ($row['transaction_type'] == 'Income') {
                                         $edit_type = 'editIncomeBtn';
                                         ?>
-                                        <td width="14%" style="color:blue">
+                                        <td width="14%" class="text-primary">
                                             ₱<?= $row['amount'] ?>
                                         </td>
                                         <td>
@@ -351,14 +373,15 @@ $total = $totalIncome - $totalExpense;
                                         ?>
                                         <td>
                                         </td>
-                                        <td width="14%" style="color:red">
+                                        <td width="14%" class="text-danger">
                                             ₱<?= $row['amount'] ?>
                                         </td>
                                         <?php
                                     }
                                     ?>
                                     <td>
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#<?= $modalName ?>">EDIT</button>
+                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#<?= $modalName ?>">
+                                        <i class="fas fa-edit fa-sm text-white-50"></i></button>
                                         <div class="modal fade" id="<?= $modalName ?>" role="dialog">
                                             <div class="modal-dialog">
                                                 <!-- Modal content-->
@@ -425,7 +448,7 @@ $total = $totalIncome - $totalExpense;
                                                             </br>
                                                             </br>
 
-                                                            <input class="btn btn-success" type="submit" name="<?= $edit_type ?>" value="Save"/>
+                                                            <input class="btn btn-primary" type="submit" name="<?= $edit_type ?>" value="Save"/>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
@@ -436,7 +459,9 @@ $total = $totalIncome - $totalExpense;
                                             </div>
                                         </div>
 
-                                        <a href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">DELETE</a>
+                                        <a onclick='javascript:return confirm("Are you sure you want to delete?");'
+                                            href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
+                                        <i class="fas fa-trash fa-sm text-white-50"></i></a>
                                     </td>
                                 </tr>
 
@@ -446,11 +471,11 @@ $total = $totalIncome - $totalExpense;
                         </table>
                     </div>
 
-                    <div class="card table-responsive">
+                    <div class="card table-responsive my-3">
                         <table class = "table" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th width='16.67%'><?= $day ?></th>
+                                    <th width='16.67%'><h4 class="text-info"><?= $month . ' ' . $day ?></h4></th>
                                     <th width='16.67%'></th>
                                     <th width='16.67%'></th>
                                     <th width='16.67%'></th>
@@ -475,7 +500,7 @@ $total = $totalIncome - $totalExpense;
                                     if ($row['transaction_type'] == 'Income') {
                                         $edit_type = 'editIncomeBtn';
                                         ?>
-                                        <td width="14%" style="color:blue">
+                                        <td width="14%" class="text-primary">
                                             ₱<?= $row['amount'] ?>
                                         </td>
                                         <td>
@@ -486,14 +511,15 @@ $total = $totalIncome - $totalExpense;
                                         ?>
                                         <td>
                                         </td>
-                                        <td width="14%" style="color:red">
+                                        <td width="14%" class="text-danger">
                                             ₱<?= $row['amount'] ?>
                                         </td>
                                         <?php
                                     }
                                     ?>
                                     <td>
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#<?= $modalName ?>">EDIT</button>
+                                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#<?= $modalName ?>">
+                                        <i class="fas fa-edit fa-sm text-white-50"></i></button>
                                         <div class="modal fade" id="<?= $modalName ?>" role="dialog">
                                             <div class="modal-dialog">
                                                 <!-- Modal content-->
@@ -560,7 +586,7 @@ $total = $totalIncome - $totalExpense;
                                                             </br>
                                                             </br>
 
-                                                            <input class="btn btn-success" type="submit" name="<?= $edit_type ?>" value="Save"/>
+                                                            <input class="btn btn-primary" type="submit" name="<?= $edit_type ?>" value="Save"/>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
@@ -571,7 +597,9 @@ $total = $totalIncome - $totalExpense;
                                             </div>
                                         </div>
 
-                                        <a href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">DELETE</a>
+                                        <a onclick='javascript:return confirm("Are you sure you want to delete?");'
+                                            href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
+                                        <i class="fas fa-trash fa-sm text-white-50"></i></a>
                                     </td>
                                 </tr>
 
@@ -594,8 +622,9 @@ $total = $totalIncome - $totalExpense;
 
     <!-- Start of data input -->
 
-    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">ADD TRANSACTION</button>
-
+    <button type="button" class="d-none d-sm-inline-block btn btn-lg btn-success shadow-sm" data-toggle="modal" data-target="#myModal">
+        <i class="fas fa-plus fa-sm text-white-50"></i> Create new transaction</button>
+    
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -668,7 +697,7 @@ $total = $totalIncome - $totalExpense;
                                     </br>
                                     </br>
 
-                                    <input class="btn btn-success" type="submit" name="incomeSubmitBtn" value="Save"/>
+                                    <input class="btn btn-primary" type="submit" name="incomeSubmitBtn" value="Save"/>
                                 </form>
                             </div>
 
@@ -719,7 +748,7 @@ $total = $totalIncome - $totalExpense;
                                     </br>
                                     </br>
 
-                                    <input class="btn btn-success" type="submit" name="expenseSubmitBtn" value="Save"/>
+                                    <input class="btn btn-primary" type="submit" name="expenseSubmitBtn" value="Save"/>
                                 </form>
                             </div>
 
@@ -761,7 +790,7 @@ $total = $totalIncome - $totalExpense;
                                     </br>
                                     </br>
 
-                                    <input class="btn btn-success" type="submit" name="transferSubmitBtn" value="Save"/>
+                                    <input class="btn btn-primary" type="submit" name="transferSubmitBtn" value="Save"/>
                                 </form>
                             </div>
                         </div>
