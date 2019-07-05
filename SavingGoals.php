@@ -81,7 +81,18 @@ require 'dbconnection.php';
                                     $percent = ($current_amt / $target_amt) * 100;
                                     ?>
                                     <div class="progress mb-4">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: <?=$percent?>%" aria-valuenow="<?= $percent?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-success" role="progressbar" 
+                                             style="width: <?= $percent ?>%" aria-valuenow="<?= $percent ?>" 
+                                             aria-valuemin="0" aria-valuemax="100">
+                                                 <?php
+                                                 if ($percent > 0) {
+                                                     if ($percent < 100) {
+                                                         print(number_format($percent, 0) . "%");
+                                                     } elseif ($percent == 100) {
+                                                         print("100% Complete!");
+                                                     }
+                                                 }
+                                                 ?></div>
                                     </div>
                                 </td>
                                 <td></td>
