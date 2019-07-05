@@ -65,7 +65,7 @@
                         <span>Saving Goals</span></a>
                 </li>
 
-                <!-- Divider -->
+<!--                 Divider 
                 <hr class="sidebar-divider d-none d-md-block">
 
                 <div class="sidebar-heading">
@@ -82,7 +82,7 @@
                     <a class="nav-link" href="SavingGoals.php">
                         <i class="fas fa-fw fa-download"></i>
                         <span>Export .CSV</span></a>
-                </li>
+                </li>-->
 
                 <hr class="sidebar-divider d-none d-md-block">
 
