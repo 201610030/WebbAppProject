@@ -139,7 +139,7 @@ if (isset($_SESSION['login']) == TRUE) {
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-9 col-lg-8 mx-auto">
-                                    <h3 class="login-heading mb-4">Welcome back!</h3>
+                                    <h3 class="login-heading mb-4">Welcome to the Expense Tracker!</h3>
                                     <form method="POST" action="login_submit.php">
                                         <div class="form-label-group">
                                             <input type="text" name="uname" id="inputUser" class="form-control" placeholder="Username" required autofocus>

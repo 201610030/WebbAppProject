@@ -14,14 +14,15 @@ if ($_POST['date'] == NULL) {
     $day = $dateArr[2];
     $amount = strip_tags($_POST['amount']);
     $contents = strip_tags($_POST['contents']);
-    
-    print_r($_FILES['image']);
-    
-    $temp_name = strip_tags($_FILES['image']['tmp_name']);
-    $file_name = strip_tags(time() . "_" . $_FILES['image']['name']);
-    $directory = "img/";
 
-    move_uploaded_file($temp_name, $directory . $file_name);
+    if ($_FILES['image']['name'] != '') {
+        $temp_name = strip_tags($_FILES['image']['tmp_name']);
+        $file_name = strip_tags(time() . "_" . $_FILES['image']['name']);
+        $directory = "img/";
+
+        move_uploaded_file($temp_name, $directory . $file_name);
+    }
+
 
     if (isset($_POST['transferSubmitBtn'])) {
         $account_from = strip_tags($_POST['account_from']);
