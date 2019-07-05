@@ -345,6 +345,29 @@ $total = $totalIncome - $totalExpense;
                                         <a onclick='javascript:return confirm("Are you sure you want to delete?");'
                                             href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
                                         <i class="fas fa-trash fa-sm text-white-50"></i></a>
+                                        
+                                        <?php
+                                        if($row['image'] != NULL){
+                                        ?>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#i<?= $modalName ?>">
+                                            <i class="fas fa-camera fa-sm text-white-50"></i></button>
+                                        <div class="modal fade" id="i<?= $modalName ?>" role="dialog">
+                                            <div class="modal-dialog">
+                                                <!-- Modal content-->
+                                                <div class="modal-content" >
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img style="max-width:100%; max-height:100%;" class="img-responsive" src="img/<?= $row['image'] ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                        }
+                                        ?>
+                                    
                                     </td>
                                 </tr>
 
@@ -466,6 +489,29 @@ $total = $totalIncome - $totalExpense;
                                         <a onclick='javascript:return confirm("Are you sure you want to delete?");'
                                             href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
                                         <i class="fas fa-trash fa-sm text-white-50"></i></a>
+                                        
+                                        <?php
+                                        if($row['image'] != NULL){
+                                        ?>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#i<?= $modalName ?>">
+                                            <i class="fas fa-camera fa-sm text-white-50"></i></button>
+                                        <div class="modal fade" id="i<?= $modalName ?>" role="dialog">
+                                            <div class="modal-dialog">
+                                                <!-- Modal content-->
+                                                <div class="modal-content" >
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img style="max-width:100%; max-height:100%;" class="img-responsive" src="img/<?= $row['image'] ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                        }
+                                        ?>
+                                    
                                     </td>
                                 </tr>
 
@@ -604,6 +650,29 @@ $total = $totalIncome - $totalExpense;
                                         <a onclick='javascript:return confirm("Are you sure you want to delete?");'
                                             href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
                                         <i class="fas fa-trash fa-sm text-white-50"></i></a>
+                                        
+                                        <?php
+                                        if($row['image'] != NULL){
+                                        ?>
+                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#i<?= $modalName ?>">
+                                            <i class="fas fa-camera fa-sm text-white-50"></i></button>
+                                        <div class="modal fade" id="i<?= $modalName ?>" role="dialog">
+                                            <div class="modal-dialog">
+                                                <!-- Modal content-->
+                                                <div class="modal-content" >
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img style="max-width:100%; max-height:100%;" class="img-responsive" src="img/<?= $row['image'] ?>">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                        }
+                                        ?>
+                                    
                                     </td>
                                 </tr>
 
@@ -663,7 +732,7 @@ $total = $totalIncome - $totalExpense;
                         <div class="tab-content" id="tabs">
                             <!-- INCOME TAB -->
                             <div id="Income" class="tab-pane fade">
-                                <form action="TransactionInsert.php" method="POST">
+                                <form action="TransactionInsert.php" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" >
                                     </br>
                                     <h2>Income</h2>
                                     <h6>Date</h6>
@@ -700,14 +769,19 @@ $total = $totalIncome - $totalExpense;
                                     <input type="text" name="contents" placeholder="Content Details"/>
                                     </br>
                                     </br>
-
+                                    
+                                    <label>Add Image</label>
+                                    <input type="file" name="image" class="form-control btn">
+                                    </br>
+                                    </br>
+                                    
                                     <input class="btn btn-primary" type="submit" name="incomeSubmitBtn" value="Save"/>
                                 </form>
                             </div>
 
                             <!-- EXPENSE TAB -->
                             <div id="Expense" class="tab-pane fade">
-                                <form action="TransactionInsert.php" method="POST">
+                                <form action="TransactionInsert.php" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" >
                                     </br>
                                     <h2>Expense</h2>
                                     <h6>Date</h6>
@@ -749,6 +823,11 @@ $total = $totalIncome - $totalExpense;
 
                                     <h6>Contents</h6>
                                     <input type="text" name="contents" placeholder="Content Details"/>
+                                    </br>
+                                    </br>
+                                    
+                                    <label>Add Image</label>
+                                    <input type="file" name="image" class="form-control btn">
                                     </br>
                                     </br>
 
