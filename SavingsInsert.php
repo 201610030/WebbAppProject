@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+
+if (isset($_SESSION['login']) == FALSE) {
+    header("Location: login.php");
+}
+
 print_r($_POST);
 
 if ($_POST['target_amt'] < 1 or $_POST['current_amt'] < 0) {

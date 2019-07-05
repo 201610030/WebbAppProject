@@ -1,5 +1,3 @@
-
-
 <?php
 session_start();
 
@@ -149,7 +147,7 @@ if (isset($_SESSION['login']) == TRUE) {
                                         <div class="form-label-group">
                                             <input type="password" name="pword" id="inputPassword" class="form-control" placeholder="Password" required>
                                             <label for="inputPassword">Password</label>
-                                            <a class="small" href="#">Forgot password?</a>
+                                           
                                         </div>
                                         <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" name="login" type="submit">Sign in</button>
                                         <div class="text-center">

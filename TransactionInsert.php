@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+
+if (isset($_SESSION['login']) == FALSE) {
+    header("Location: login.php");
+}
+
 if ($_POST['date'] == NULL) {
     echo "<script>alert('You must enter a date!'); location.href='Transactions.php'</script>";
 } else if ($_POST['amount'] < 1) {

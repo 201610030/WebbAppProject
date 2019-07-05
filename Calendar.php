@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <?php
+
+session_start();
+
+if (isset($_SESSION['login']) == FALSE) {
+    header("Location: login.php");
+}
+
     $title = "Calendar";
     require "header.php";
 ?>

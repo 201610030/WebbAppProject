@@ -16,7 +16,7 @@ $usernameQuery = $db->query("SELECT * from accounts where uname = '$uname' ");
 if ($usernameQuery->num_rows > 0) {
     echo "<script>alert('Username is already Taken!'); location.href='signup.php'</script>";
 }
-if ($pword != $cpword) {
+else if ($pword != $cpword) {
     echo "<script>alert('Password Does Not Match'); location.href='signup.php'</script>";
 } else {
     $mail->Subject = "Registration";

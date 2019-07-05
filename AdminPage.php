@@ -1,7 +1,17 @@
 <?php
+
+session_start();
+
+if (isset($_SESSION['login']) == FALSE) {
+    header("Location: login.php");
+}else if(isset($_SESSION['id']) == 999){
+    header("Location: Transactions.php");
+}
+
 $title = "Admin Page";
 require "header.php";
 require 'dbconnection.php';
+
 ?>
 
 <!-- Begin Page Content -->

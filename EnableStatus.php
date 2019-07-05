@@ -1,4 +1,11 @@
 <?php
+
+session_start();
+
+if (isset($_SESSION['login']) == FALSE) {
+    header("Location: login.php");
+}
+
 require 'dbconnection.php';
 
 $acnt_id = strip_tags($_GET['acntid']);

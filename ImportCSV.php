@@ -1,4 +1,11 @@
 <?php
+
+session_start();
+
+if (isset($_SESSION['login']) == FALSE) {
+    header("Location: login.php");
+}
+
 $title = "Saving Goals";
 require "header.php";
 require 'dbconnection.php';

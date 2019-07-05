@@ -1,4 +1,12 @@
 <?php
+
+session_start();
+
+if (isset($_SESSION['login']) == FALSE) {
+    header("Location: login.php");
+}
+
+
 $title = "Monthly Statistics";
 require "dbconnection.php";
 require "header.php";

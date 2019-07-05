@@ -1,3 +1,11 @@
+<?php
+session_start();
+
+if (isset($_SESSION['login']) == TRUE) {
+    header("Location: transactions.php");
+} 
+?>
+
 <html>
     <title>Login</title>
     <head>

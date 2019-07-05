@@ -1,5 +1,5 @@
 <?php
-    
+
 require 'dbconnection.php';
 
 $verification = $_GET['vcode'];
