@@ -20,6 +20,7 @@ if ($_POST['date'] == NULL) {
     $day = $dateArr[2];
     $amount = strip_tags($_POST['amount']);
     $contents = strip_tags($_POST['contents']);
+    $accounts_id = $_SESSION['userid'];
 
     if ($_FILES['image']['name'] != '') {
         $temp_name = strip_tags($_FILES['image']['tmp_name']);
