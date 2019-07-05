@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2019 at 05:53 PM
+-- Generation Time: Jul 06, 2019 at 12:13 AM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -36,8 +36,8 @@ CREATE TABLE `accounts` (
   `lname` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
   `vcode` varchar(30) NOT NULL,
-  `is_verify` int(1) NOT NULL DEFAULT '0',
-  `status` int(1) NOT NULL DEFAULT '1'
+  `is_verify` int(1) NOT NULL DEFAULT 0,
+  `status` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -93,13 +93,6 @@ CREATE TABLE `transfer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `transfer`
---
-
-INSERT INTO `transfer` (`accounts_id`, `month`, `day`, `year`, `account_from`, `account_to`, `contents`, `amount`) VALUES
-(1, 7, 4, 2019, 'Cash', 'Accounts', 'deposit', 1000);
-
---
 -- Indexes for dumped tables
 --
 
@@ -129,19 +122,19 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `savings`
 --
 ALTER TABLE `savings`
-  MODIFY `savings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `savings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
