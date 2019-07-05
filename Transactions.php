@@ -10,6 +10,8 @@ $title = "Transactions";
 require "header.php";
 require 'dbconnection.php';
 
+$accounts_id = $_SESSION['userid'];
+
 if (isset($_GET['month'])) {
     $month = $_GET['month'];
     $action = $_GET['action'];

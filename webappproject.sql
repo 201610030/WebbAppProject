@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2019 at 03:24 PM
+-- Generation Time: Jul 05, 2019 at 05:53 PM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -40,38 +40,6 @@ CREATE TABLE `accounts` (
   `status` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `accounts`
---
-
-INSERT INTO `accounts` (`id`, `uname`, `pword`, `fname`, `lname`, `email`, `vcode`, `is_verify`, `status`) VALUES
-(1, 'bryan', 'aaa', 'Bryan', 'Edejer', 'be@yahoo.com', '', 0, 0),
-(2, 'kiel', 'bbb', 'Kiel', 'Quitain', 'kq@gmail.com', '', 0, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `account_types`
---
-
-CREATE TABLE `account_types` (
-  `user_id` int(11) NOT NULL,
-  `account_type` int(11) NOT NULL,
-  `account_bal` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `account_types`
---
-
-INSERT INTO `account_types` (`user_id`, `account_type`, `account_bal`) VALUES
-(1, 0, 279),
-(2, 0, 850),
-(1, 1, 1000),
-(1, 2, 10000),
-(2, 1, 0),
-(2, 2, 10000);
-
 -- --------------------------------------------------------
 
 --
@@ -86,16 +54,6 @@ CREATE TABLE `savings` (
   `target_amt` double NOT NULL,
   `target_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `savings`
---
-
-INSERT INTO `savings` (`savings_id`, `accounts_id`, `savings_desc`, `current_amt`, `target_amt`, `target_date`) VALUES
-(2, 2, 'Tickets to HK', 1000, 13000, '2019-09-11'),
-(7, 1, 'New Phone', 1000, 12000, '0000-00-00'),
-(8, 1, 'Tickets to NY', 0, 50000, '0000-00-00'),
-(9, 1, 'Laptop Repair', 1000, 2500, '2019-07-30');
 
 -- --------------------------------------------------------
 
@@ -116,24 +74,6 @@ CREATE TABLE `transactions` (
   `amount` double NOT NULL,
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `transactions`
---
-
-INSERT INTO `transactions` (`transaction_id`, `accounts_id`, `month`, `day`, `year`, `account`, `category`, `contents`, `transaction_type`, `amount`, `image`) VALUES
-(1, 1, 7, 3, 2019, 'Cash', 'Food', 'lunch', 'Expense', 50, ''),
-(2, 1, 7, 3, 2019, 'Cash', 'Food', 'dinner', 'Expense', 50, ''),
-(4, 2, 7, 1, 2019, 'Card', 'Allowance', '1 week baon', 'Income', 1000, ''),
-(5, 2, 7, 3, 2019, 'Card', 'Food', 'lunch', 'Expense', 150, ''),
-(6, 1, 7, 4, 2019, 'Cash', 'Petty cash', 'bigay ni tropa', 'Income', 500, ''),
-(8, 1, 7, 4, 2019, 'Cash', 'Allowance', 'baon', 'Income', 150, ''),
-(9, 1, 7, 4, 2019, 'Cash', 'Social Life', 'Pang DOTA', 'Expense', 20, ''),
-(11, 1, 6, 25, 2019, 'Cash', 'Allowance', 'Pa birthday for me', 'Income', 500, ''),
-(12, 1, 6, 25, 2019, 'Cash', 'Food', 'Inuman Preeeee', 'Expense', 500, ''),
-(14, 1, 6, 26, 2019, 'Cash', 'Health', 'Accident', 'Expense', 5000, ''),
-(18, 1, 7, 2, 2019, 'Accounts', 'Food', 'chocolate', 'Expense', 150, ''),
-(31, 1, 7, 5, 2019, 'Cash', 'Food', 'Apple', 'Expense', 20, '1562332275_apple.jpg');
 
 -- --------------------------------------------------------
 
@@ -201,7 +141,7 @@ ALTER TABLE `savings`
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
