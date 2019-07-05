@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2019 at 12:13 AM
+-- Generation Time: Jul 06, 2019 at 12:35 AM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -40,6 +40,13 @@ CREATE TABLE `accounts` (
   `status` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`id`, `uname`, `pword`, `fname`, `lname`, `email`, `vcode`, `is_verify`, `status`) VALUES
+(5, 'sample1', '123', 'Bryan', 'Edejer', 'bryan.joshua.edejer@gmail.com', '1188616295d1fcd8c920a8', 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -54,6 +61,13 @@ CREATE TABLE `savings` (
   `target_amt` double NOT NULL,
   `target_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `savings`
+--
+
+INSERT INTO `savings` (`savings_id`, `accounts_id`, `savings_desc`, `current_amt`, `target_amt`, `target_date`) VALUES
+(11, 5, 'Laptop', 20000, 50000, '2019-12-31');
 
 -- --------------------------------------------------------
 
@@ -74,6 +88,20 @@ CREATE TABLE `transactions` (
   `amount` double NOT NULL,
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `transactions`
+--
+
+INSERT INTO `transactions` (`transaction_id`, `accounts_id`, `month`, `day`, `year`, `account`, `category`, `contents`, `transaction_type`, `amount`, `image`) VALUES
+(52, 5, 7, 6, 2019, 'Cash', 'Allowance', 'Baon', 'Income', 150, ''),
+(53, 5, 7, 6, 2019, 'Cash', 'Food', 'Lunch', 'Expense', 50, ''),
+(54, 5, 7, 6, 2019, 'Cash', 'Health', 'Medicine', 'Expense', 20, ''),
+(55, 5, 7, 6, 2019, 'Cash', 'Social Life', 'Outing with friends', 'Expense', 50, ''),
+(56, 5, 7, 6, 2019, 'Cash', 'Food', 'Apple', 'Expense', 10, '1562365526_apple.jpg'),
+(57, 5, 6, 1, 2019, 'Cash', 'Other', 'School needs', 'Income', 2000, ''),
+(59, 5, 6, 30, 2019, 'Cash', 'Education', 'Paid Tuition', 'Expense', 1000, ''),
+(60, 5, 6, 1, 2019, 'Cash', 'Apparel', 'Uniform', 'Expense', 750, '');
 
 -- --------------------------------------------------------
 
@@ -122,19 +150,19 @@ ALTER TABLE `transactions`
 -- AUTO_INCREMENT for table `accounts`
 --
 ALTER TABLE `accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `savings`
 --
 ALTER TABLE `savings`
-  MODIFY `savings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `savings_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
-  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `transaction_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
