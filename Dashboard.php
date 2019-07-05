@@ -105,6 +105,7 @@ $expense = $slice_expense['expense_data'];
 
 
 $total = $income + $expense; 
+$curr_total_bal = $income - $expense; 
 $percentage_income = ($income / $total) * 100; 
 $percentage_expense = ($expense / $total) * 100;
 
@@ -290,7 +291,7 @@ $june_income, $july_income,$august_income, $september_income, $october_income, $
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Current Balance</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">₱40,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">₱<?php echo $curr_total_bal?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-chart-line fa-2x text-gray-300"></i>

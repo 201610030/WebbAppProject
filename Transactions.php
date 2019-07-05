@@ -281,7 +281,7 @@ $total = $totalIncome - $totalExpense;
                                                     </div>
                                                     <div class="modal-body">
 
-                                                        <form action="TransactionEdit.php?trans_id=<?= $row['transaction_id'] ?>" method="POST">
+                                                        <form action="TransactionEdit.php?trans_id=<?= $row['transaction_id'] ?>" method="POST"  enctype="multipart/form-data" accept-charset="UTF-8" >
                                                             </br>
                                                             <h6>Date</h6>
                                                             <input type="date" name="date"  value="<?= $newformat ?>">
@@ -334,6 +334,15 @@ $total = $totalIncome - $totalExpense;
 
                                                             <h6>Contents</h6>
                                                             <input type="text" name="contents" placeholder="Content Details" value="<?= $row['contents'] ?>"/>
+                                                            </br>
+                                                            </br>
+                                                            
+                                                            <input type="checkbox" name="remove" value="remove">Remove Image?
+                                                            </br>
+                                                            </br>
+                                    
+                                                            <label>Change Image?</label>
+                                                            <input type="file" name="image" class="form-control btn">
                                                             </br>
                                                             </br>
 
@@ -425,7 +434,7 @@ $total = $totalIncome - $totalExpense;
                                                     </div>
                                                     <div class="modal-body">
 
-                                                        <form action="TransactionEdit.php?trans_id=<?= $row['transaction_id'] ?>" method="POST">
+                                                        <form action="TransactionEdit.php?trans_id=<?= $row['transaction_id'] ?>" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" >
                                                             </br>
                                                             <h6>Date</h6>
                                                             <input type="date" name="date"  value="<?= $newformat ?>">
@@ -478,6 +487,15 @@ $total = $totalIncome - $totalExpense;
 
                                                             <h6>Contents</h6>
                                                             <input type="text" name="contents" placeholder="Content Details" value="<?= $row['contents'] ?>"/>
+                                                            </br>
+                                                            </br>
+                                                            
+                                                            <input type="checkbox" name="remove" value="remove">Remove Image?
+                                                            </br>
+                                                            </br>
+                                    
+                                                            <label>Change Image?</label>
+                                                            <input type="file" name="image" class="form-control btn">
                                                             </br>
                                                             </br>
 
@@ -586,7 +604,7 @@ $total = $totalIncome - $totalExpense;
                                                     </div>
                                                     <div class="modal-body">
 
-                                                        <form action="TransactionEdit.php?trans_id=<?= $row['transaction_id'] ?>" method="POST">
+                                                        <form action="TransactionEdit.php?trans_id=<?= $row['transaction_id'] ?>" method="POST" enctype="multipart/form-data" accept-charset="UTF-8" >
                                                             </br>
                                                             <h6>Date</h6>
                                                             <input type="date" name="date"  value="<?= $newformat ?>">
@@ -639,6 +657,15 @@ $total = $totalIncome - $totalExpense;
 
                                                             <h6>Contents</h6>
                                                             <input type="text" name="contents" placeholder="Content Details" value="<?= $row['contents'] ?>"/>
+                                                            </br>
+                                                            </br>
+                                                            
+                                                            <input type="checkbox" name="remove" value="remove">Remove Image?
+                                                            </br>
+                                                            </br>
+                                    
+                                                            <label>Change Image?</label>
+                                                            <input type="file" name="image" class="form-control btn">
                                                             </br>
                                                             </br>
 
