@@ -109,9 +109,10 @@ require 'dbconnection.php';
                                     <div class="modal-header">
                                         <h3 class="modal-title">Edit Piggy Bank</h3>
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="SavingsEdit.php?id=<?= $id ?>" method="POST">
+                                    </div
+                                    <form action="SavingsEdit.php?id=<?= $id ?>" method="POST">
+                                        <div class="modal-body">
+
                                             <div class="form-group row">
                                                 <label class="col-4 col-form-label" for="savings_desc">Piggy Bank Name</label> 
                                                 <div class="col-8">
@@ -152,13 +153,13 @@ require 'dbconnection.php';
 
                                                 </div>
                                             </div> 
-                                            <div class="form-group row">
-                                                <div class="offset-4 col-8">
-                                                    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+
                                 </div>
                             </div>
                         </div>
@@ -185,8 +186,9 @@ require 'dbconnection.php';
                 <h3 class="modal-title">Create New Piggy Bank</h3>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-body">
-                <form action="SavingsInsert.php" method="POST">
+            <form action="SavingsInsert.php" method="POST">
+                <div class="modal-body">
+
                     <div class="form-group row">
                         <label class="col-4 col-form-label" for="savings_desc">Piggy Bank Name *</label> 
                         <div class="col-8">
@@ -215,14 +217,15 @@ require 'dbconnection.php';
                                    class="form-control">
                         </div>
                     </div> 
-                    <div class="form-group row">
-                        <div class="offset-4 col-8">
-                            <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                    <hr>
-                    <span>* required</span>
-                </form>
+                            
+                    
+                    <small class="float-right">* required</small>
+
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button name="submit" type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
     </div>
