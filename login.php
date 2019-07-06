@@ -1,7 +1,9 @@
 <?php
 session_start();
 
-if (isset($_SESSION['login']) == TRUE) {
+if (isset($_SESSION['specialid']) == 999) {
+    header("Location: AdminPage.php");
+} else if (isset($_SESSION['login']) == TRUE) {
     header("Location: Dashboard.php");
 }
 ?>

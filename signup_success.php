@@ -13,7 +13,9 @@ $pword = strip_tags($_POST['pword']);
 $cpword = strip_tags($_POST['cpword']);
 $vcode = uniqid(rand());
 
-if ($_SESSION['login'] == TRUE) {
+if (isset($_SESSION['specialid']) == 999) {
+    header("Location: AdminPage.php");
+} else if (isset($_SESSION['login']) == TRUE) {
     header("Location: Dashboard.php");
 } else if (!empty($email)) {
     $usernameQuery = $db->query("SELECT * from accounts where uname = '$uname' ");
@@ -35,7 +37,7 @@ if ($_SESSION['login'] == TRUE) {
             echo "<script>alert('Registration Successful! Please Check your Email!'); location.href='login.php'</script>";
         }
     }
-}else{
+} else {
     header("Location: login.php");
 }
 ?>

@@ -1,8 +1,9 @@
 <?php
 
 session_start();
-
-if (isset($_SESSION['login']) == FALSE) {
+if (isset($_SESSION['specialid']) == 999) {
+    header("Location: AdminPage.php");
+} else if (isset($_SESSION['login']) == FALSE) {
     header("Location: login.php");
 }
 
@@ -18,6 +19,6 @@ $target_date = strip_tags($_POST['target_date']);
 
 
 $db->query("UPDATE savings SET savings_desc = '$name', current_amt = '$current_amt', "
-        . " target_amt='$target_amt', target_date='$target_date' where savings_id = '$id'") or die($db->error);
+                . " target_amt='$target_amt', target_date='$target_date' where savings_id = '$id'") or die($db->error);
 
 echo "<script>alert('Edit Success'); location.href='SavingGoals.php'</script>";

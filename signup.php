@@ -1,9 +1,11 @@
 <?php
 session_start();
 
-if (isset($_SESSION['login']) == TRUE) {
+if (isset($_SESSION['specialid']) == 999) {
+    header("Location: AdminPage.php");
+} else if (isset($_SESSION['login']) == TRUE) {
     header("Location: Dashboard.php");
-} 
+}
 ?>
 
 <html>
@@ -142,17 +144,17 @@ if (isset($_SESSION['login']) == TRUE) {
                                             <input type="text" name="fname" id="inputF" class="form-control" placeholder="First Name" required autofocus>
                                             <label for="inputF">First Name</label>
                                         </div>
-                                        
+
                                         <div class="form-label-group">
                                             <input type="text" name="lname" id="inputL" class="form-control" placeholder="Last Name" required autofocus>
                                             <label for="inputL">Last Name</label>
                                         </div>
-                                        
+
                                         <div class="form-label-group">
                                             <input type="text" name="uname" id="inputU" class="form-control" placeholder="Username" required autofocus>
                                             <label for="inputU">Username</label>
                                         </div>
-                                        
+
                                         <div class="form-label-group">
                                             <input type="email" name="email" id="inputE" class="form-control" placeholder="E-Mail" required autofocus>
                                             <label for="inputE">E-Mail</label>
@@ -162,12 +164,12 @@ if (isset($_SESSION['login']) == TRUE) {
                                             <input type="password" name="pword" id="inputP" class="form-control" placeholder="Password" required>
                                             <label for="inputP">Password</label>
                                         </div>
-                                        
+
                                         <div class="form-label-group">
                                             <input type="password" name="cpword" id="inputCP" class="form-control" placeholder="Confirm Password" required>
                                             <label for="inputCP">Confirm Password</label>
                                         </div>
-                                        
+
                                         <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" name="submit" type="submit">Submit</button>
                                     </form>
                                 </div>

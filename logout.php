@@ -2,7 +2,7 @@
 
 session_start();
 
-if ($_SESSION['login'] == FALSE) {
+if (isset($_SESSION['login']) == FALSE) {
     header("Location: login.php");
 } else {
     session_destroy();

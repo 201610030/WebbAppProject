@@ -1,8 +1,8 @@
 <?php
-
 session_start();
-
-if (isset($_SESSION['login']) == FALSE) {
+if (isset($_SESSION['specialid']) == 999) {
+    header("Location: AdminPage.php");
+} else if (isset($_SESSION['login']) == FALSE) {
     header("Location: login.php");
 }
 
@@ -41,25 +41,25 @@ $accounts_id = $_SESSION['userid'];
                         </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        $query = $db->query("SELECT * FROM savings WHERE accounts_id = " . $accounts_id . " "
-                                . "ORDER BY target_date ASC") or die($db->error);
+<?php
+$query = $db->query("SELECT * FROM savings WHERE accounts_id = " . $accounts_id . " "
+        . "ORDER BY target_date ASC") or die($db->error);
 
-                        $ctr = 0;
+$ctr = 0;
 
-                        while ($row = $query->fetch_assoc()):
-                            $target_date = NULL;
+while ($row = $query->fetch_assoc()):
+    $target_date = NULL;
 
-                            if ($row['target_date'] != NULL) {
-                                $timestamp = strtotime($row['target_date']);
-                                $date = date("Y-m-d", $timestamp);
-                                $target_date = date("M j Y", $timestamp);
-                            }
-                            $id = $row['savings_id'];
-                            $name = $row['savings_desc'];
-                            $current_amt = $row['current_amt'];
-                            $target_amt = $row['target_amt'];
-                            ?>
+    if ($row['target_date'] != NULL) {
+        $timestamp = strtotime($row['target_date']);
+        $date = date("Y-m-d", $timestamp);
+        $target_date = date("M j Y", $timestamp);
+    }
+    $id = $row['savings_id'];
+    $name = $row['savings_desc'];
+    $current_amt = $row['current_amt'];
+    $target_amt = $row['target_amt'];
+    ?>
 
                             <tr>
                                 <td><button type="button" data-toggle="modal" data-target="#Edit-<?= $id ?>"
@@ -77,31 +77,31 @@ $accounts_id = $_SESSION['userid'];
                                 <td>₱ <?= number_format($current_amt) ?></td>
                                 <td>₱ <?= number_format($target_amt) ?></td>
                                 <td><?php
-                                    if ($date != "1970-01-01") {
-                                        print($target_date);
-                                    }
-                                    ?>
+                        if ($date != "1970-01-01") {
+                            print($target_date);
+                        }
+    ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="2"></td>
                                 <td colspan="2">
-                                    <?php
-                                    $percent = ($current_amt / $target_amt) * 100;
-                                    ?>
+    <?php
+    $percent = ($current_amt / $target_amt) * 100;
+    ?>
                                     <div class="progress mb-4">
                                         <div class="progress-bar bg-success" role="progressbar" 
                                              style="width: <?= $percent ?>%" aria-valuenow="<?= $percent ?>" 
                                              aria-valuemin="0" aria-valuemax="100">
-                                                 <?php
-                                                 if ($percent > 0) {
-                                                     if ($percent < 100) {
-                                                         print(number_format($percent, 0) . "%");
-                                                     } elseif ($percent == 100) {
-                                                         print("100% Complete!");
-                                                     }
-                                                 }
-                                                 ?></div>
+    <?php
+    if ($percent > 0) {
+        if ($percent < 100) {
+            print(number_format($percent, 0) . "%");
+        } elseif ($percent == 100) {
+            print("100% Complete!");
+        }
+    }
+    ?></div>
                                     </div>
                                 </td>
                                 <td></td>
@@ -146,19 +146,19 @@ $accounts_id = $_SESSION['userid'];
                                             <div class="form-group row">
                                                 <label for="target_date" class="col-4 col-form-label">Target Date</label> 
                                                 <div class="col-8">
-                                                    <?php
-                                                    if ($date == "1970-01-01"):
-                                                        ?>
+    <?php
+    if ($date == "1970-01-01"):
+        ?>
                                                         <input id="target_date" name="target_date" type="date" 
                                                                class="form-control">
-                                                               <?php
-                                                           else:
-                                                               ?>
+        <?php
+    else:
+        ?>
                                                         <input id="target_date" name="target_date" type="date" 
                                                                class="form-control" required="required" value="<?= $date ?>">
-                                                           <?php
-                                                           endif;
-                                                           ?>
+    <?php
+    endif;
+    ?>
 
                                                 </div>
                                             </div> 
@@ -173,9 +173,9 @@ $accounts_id = $_SESSION['userid'];
                             </div>
                         </div>
 
-                        <?php
-                    endwhile;
-                    ?>
+    <?php
+endwhile;
+?>
                     </tbody>
                 </table>
             </div>
@@ -226,14 +226,14 @@ $accounts_id = $_SESSION['userid'];
                                    class="form-control">
                         </div>
                     </div> 
-                    
+
                     <small>* required</small>
 
                 </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button name="submit" type="submit" class="btn btn-primary">Submit</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </form>
         </div>
     </div>

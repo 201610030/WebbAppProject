@@ -1,8 +1,8 @@
 <?php
-
 session_start();
-
-if (isset($_SESSION['login']) == FALSE) {
+if (isset($_SESSION['specialid']) == 999) {
+    header("Location: AdminPage.php");
+} else if (isset($_SESSION['login']) == FALSE) {
     header("Location: login.php");
 }
 
@@ -113,11 +113,11 @@ $total = $totalIncome - $totalExpense;
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
-    
+
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Transactions</h1>
         <button type="button" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" data-toggle="modal" data-target="#myModal">
-         <i class="fas fa-plus fa-sm text-white-50"></i> Create new transaction</button>
+            <i class="fas fa-plus fa-sm text-white-50"></i> Create new transaction</button>
 
     </div>
 
@@ -185,45 +185,45 @@ $total = $totalIncome - $totalExpense;
                 <a href="Transactions.php?month=<?= $month ?>&year=<?= $year ?>&action=prev" class="btn btn-sm btn-info">
                     <i class="fas fa-sm fa-chevron-left text-white-50"></i> Previous</a>
 
-                <?= $month . ' ' . $year ?>
+<?= $month . ' ' . $year ?>
 
                 <a href="Transactions.php?month=<?= $month ?>&year=<?= $year ?>&action=next" class="btn btn-sm btn-info">
                     Next <i class="fas fa-chevron-right fa-sm text-white-50"></i></a>
             </h6>
         </div>
         <div class="card-body">
-            <?php
-            $query = $db->query("SELECT * FROM transactions WHERE accounts_id = " . $accounts_id . " "
-                    . "AND month = " . date("n", strtotime($month)) . " AND year = " . $year . " ORDER BY day ASC;") or die($db->error);
+<?php
+$query = $db->query("SELECT * FROM transactions WHERE accounts_id = " . $accounts_id . " "
+        . "AND month = " . date("n", strtotime($month)) . " AND year = " . $year . " ORDER BY day ASC;") or die($db->error);
 
-            $ctr = 0;
+$ctr = 0;
 
-            while ($row = $query->fetch_assoc()):
+while ($row = $query->fetch_assoc()):
 
-                $y = $row['year'];
-                $m = $row['month'];
-                $d = $row['day'];
+    $y = $row['year'];
+    $m = $row['month'];
+    $d = $row['day'];
 
-                $time = strtotime($y . "-" . $m . '-' . $d);
-                $newformat = date("Y-m-d", $time);
+    $time = strtotime($y . "-" . $m . '-' . $d);
+    $newformat = date("Y-m-d", $time);
 
-                $modalName = 'MyModal' . $ctr;
+    $modalName = 'MyModal' . $ctr;
 
-                if ($query->num_rows == 0) {
-                    break;
-                }
+    if ($query->num_rows == 0) {
+        break;
+    }
 
-                if ($ctr > 0) {
-                    $day = $row['day'];
-                    $ctr++;
-                }
+    if ($ctr > 0) {
+        $day = $row['day'];
+        $ctr++;
+    }
 
-                if (!isset($day)) {
-                    $ctr = 1;
+    if (!isset($day)) {
+        $ctr = 1;
 
-                    $prevday = $row['day'];
-                    $day = $row['day'];
-                    ?>
+        $prevday = $row['day'];
+        $day = $row['day'];
+        ?>
 
                     <div class="card table-responsive my-3">
                         <table class = "table" width="100%" cellspacing="0">
@@ -241,36 +241,36 @@ $total = $totalIncome - $totalExpense;
 
                                 <tr>
                                     <td>
-                                        <?= $row['category'] ?>
+        <?= $row['category'] ?>
                                     </td>
                                     <td>
-                                        <?= $row['contents'] ?>
+        <?= $row['contents'] ?>
                                     </td>
                                     <td>
-                                        <?= $row['account'] ?>
+        <?= $row['account'] ?>
                                     </td>
 
-                                    <?php
-                                    if ($row['transaction_type'] == 'Income') {
-                                        $edit_type = 'editIncomeBtn';
-                                        ?>
+        <?php
+        if ($row['transaction_type'] == 'Income') {
+            $edit_type = 'editIncomeBtn';
+            ?>
                                         <td width="14%" class="text-primary">
                                             ₱<?= $row['amount'] ?>
                                         </td>
                                         <td>
                                         </td>
-                                        <?php
-                                    } else {
-                                        $edit_type = 'editExpenseBtn';
-                                        ?>
+            <?php
+        } else {
+            $edit_type = 'editExpenseBtn';
+            ?>
                                         <td>
                                         </td>
                                         <td width="14%" class="text-danger">
                                             ₱<?= $row['amount'] ?>
                                         </td>
-                                        <?php
-                                    }
-                                    ?>
+            <?php
+        }
+        ?>
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#<?= $modalName ?>">
                                             <i class="fas fa-edit fa-sm text-white-50"></i></button>
@@ -292,40 +292,80 @@ $total = $totalIncome - $totalExpense;
                                                             </br>
                                                             <h6>Account</h6>
                                                             <select name="account">
-                                                                <option <?php if($row['account']=="Cash"){ echo 'selected="selected"'; }?>>Cash</option>
-                                                                <option <?php if($row['account']=="Savings"){ echo 'selected="selected"'; }?>>Savings</option>
-                                                                <option <?php if($row['account']=="Card"){ echo 'selected="selected"'; }?>>Card</option>
+                                                                <option <?php if ($row['account'] == "Cash") {
+                                echo 'selected="selected"';
+                            } ?>>Cash</option>
+                                                                <option <?php if ($row['account'] == "Savings") {
+                                echo 'selected="selected"';
+                            } ?>>Savings</option>
+                                                                <option <?php if ($row['account'] == "Card") {
+                                echo 'selected="selected"';
+                            } ?>>Card</option>
                                                             </select>
                                                             </br>
                                                             </br>
                                                             <h6>Category</h6>
                                                             <select name="category">
-                                                                <?php
-                                                                if ($row['transaction_type'] == 'Income') {
-                                                                    ?>
-                                                                    <option <?php if($row['category']=="Allowance"){ echo 'selected="selected"'; }?>>Allowance</option>
-                                                                    <option <?php if($row['category']=="Salary"){ echo 'selected="selected"'; }?>>Salary</option>
-                                                                    <option <?php if($row['category']=="Petty cash"){ echo 'selected="selected"'; }?>>Petty cash</option>
-                                                                    <option <?php if($row['category']=="Bonus"){ echo 'selected="selected"'; }?>>Bonus</option>
-                                                                    <option <?php if($row['category']=="Other"){ echo 'selected="selected"'; }?>>Other</option>
+        <?php
+        if ($row['transaction_type'] == 'Income') {
+            ?>
+                                                                    <option <?php if ($row['category'] == "Allowance") {
+                echo 'selected="selected"';
+            } ?>>Allowance</option>
+                                                                    <option <?php if ($row['category'] == "Salary") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Salary</option>
+                                                                    <option <?php if ($row['category'] == "Petty cash") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Petty cash</option>
+                                                                    <option <?php if ($row['category'] == "Bonus") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Bonus</option>
+                                                                    <option <?php if ($row['category'] == "Other") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Other</option>
                                                                     <?php
                                                                 } else {
                                                                     ?>
-                                                                    <option <?php if($row['category']=="Food"){ echo 'selected="selected"'; }?>>Food</option>
-                                                                    <option <?php if($row['category']=="Social Life"){ echo 'selected="selected"'; }?>>Social Life</option>
-                                                                    <option <?php if($row['category']=="Self-Development"){ echo 'selected="selected"'; }?>>Self-Development</option>
-                                                                    <option <?php if($row['category']=="Transportation"){ echo 'selected="selected"'; }?>>Transportation</option>
-                                                                    <option <?php if($row['category']=="Culture"){ echo 'selected="selected"'; }?>>Culture</option>
-                                                                    <option <?php if($row['category']=="Household"){ echo 'selected="selected"'; }?>>Household</option>
-                                                                    <option <?php if($row['category']=="Apparel"){ echo 'selected="selected"'; }?>>Apparel</option>
-                                                                    <option <?php if($row['category']=="Beauty"){ echo 'selected="selected"'; }?>>Beauty</option>
-                                                                    <option <?php if($row['category']=="Health"){ echo 'selected="selected"'; }?>>Health</option>
-                                                                    <option <?php if($row['category']=="Education"){ echo 'selected="selected"'; }?>>Education</option>
-                                                                    <option <?php if($row['category']=="Gift"){ echo 'selected="selected"'; }?>>Gift</option>
-                                                                    <option <?php if($row['category']=="Other"){ echo 'selected="selected"'; }?>>Other</option>
-                                                                    <?php
-                                                                }
-                                                                ?>
+                                                                    <option <?php if ($row['category'] == "Food") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Food</option>
+                                                                    <option <?php if ($row['category'] == "Social Life") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Social Life</option>
+                                                                    <option <?php if ($row['category'] == "Self-Development") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Self-Development</option>
+                                                                    <option <?php if ($row['category'] == "Transportation") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Transportation</option>
+                                                                    <option <?php if ($row['category'] == "Culture") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Culture</option>
+                                                                    <option <?php if ($row['category'] == "Household") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Household</option>
+                                                                    <option <?php if ($row['category'] == "Apparel") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Apparel</option>
+                                                                    <option <?php if ($row['category'] == "Beauty") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Beauty</option>
+                                                                    <option <?php if ($row['category'] == "Health") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Health</option>
+                                                                    <option <?php if ($row['category'] == "Education") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Education</option>
+                                                                    <option <?php if ($row['category'] == "Gift") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Gift</option>
+                                                                    <option <?php if ($row['category'] == "Other") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Other</option>
+            <?php
+        }
+        ?>
                                                             </select>
                                                             </br>
                                                             </br>
@@ -339,11 +379,11 @@ $total = $totalIncome - $totalExpense;
                                                             <input type="text" name="contents" placeholder="Content Details" value="<?= $row['contents'] ?>"/>
                                                             </br>
                                                             </br>
-                                                            
+
                                                             <input type="checkbox" name="remove" value="remove">Remove Image?
                                                             </br>
                                                             </br>
-                                    
+
                                                             <label>Change Image?</label>
                                                             <input type="file" name="image" class="form-control btn">
                                                             </br>
@@ -361,72 +401,72 @@ $total = $totalIncome - $totalExpense;
                                         </div>
 
                                         <a onclick='javascript:return confirm("Are you sure you want to delete?");'
-                                            href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
-                                        <i class="fas fa-trash fa-sm text-white-50"></i></a>
-                                        
-                                        <?php
-                                        if($row['image'] != NULL){
+                                           href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
+                                            <i class="fas fa-trash fa-sm text-white-50"></i></a>
+
+                                    <?php
+                                    if ($row['image'] != NULL) {
                                         ?>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#i<?= $modalName ?>">
-                                            <i class="fas fa-camera fa-sm text-white-50"></i></button>
-                                        <div class="modal fade" id="i<?= $modalName ?>" role="dialog">
-                                            <div class="modal-dialog">
-                                                <!-- Modal content-->
-                                                <div class="modal-content" >
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <img style="max-width:100%; max-height:100%;" class="img-responsive" src="img/<?= $row['image'] ?>">
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#i<?= $modalName ?>">
+                                                <i class="fas fa-camera fa-sm text-white-50"></i></button>
+                                            <div class="modal fade" id="i<?= $modalName ?>" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content" >
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img style="max-width:100%; max-height:100%;" class="img-responsive" src="img/<?= $row['image'] ?>">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         <?php
-                                        }
-                                        ?>
-                                    
+                                    }
+                                    ?>
+
                                     </td>
                                 </tr>
 
-                                <?php
-                            } else if ($prevday == $day) {
-                                ?>
+        <?php
+    } else if ($prevday == $day) {
+        ?>
                                 <tr>
                                     <td>
-                                        <?= $row['category'] ?>
+        <?= $row['category'] ?>
                                     </td>
                                     <td>
-                                        <?= $row['contents'] ?>
+        <?= $row['contents'] ?>
                                     </td>
                                     <td>
-                                        <?= $row['account'] ?>
+        <?= $row['account'] ?>
                                     </td>
 
-                                    <?php
-                                    if ($row['transaction_type'] == 'Income') {
-                                        $edit_type = 'editIncomeBtn';
-                                        ?>
+        <?php
+        if ($row['transaction_type'] == 'Income') {
+            $edit_type = 'editIncomeBtn';
+            ?>
                                         <td width="14%" class="text-primary">
                                             ₱<?= $row['amount'] ?>
                                         </td>
                                         <td>
                                         </td>
-                                        <?php
-                                    } else {
-                                        $edit_type = 'editExpenseBtn';
-                                        ?>
+            <?php
+        } else {
+            $edit_type = 'editExpenseBtn';
+            ?>
                                         <td>
                                         </td>
                                         <td width="14%" class="text-danger">
                                             ₱<?= $row['amount'] ?>
                                         </td>
-                                        <?php
-                                    }
-                                    ?>
+            <?php
+        }
+        ?>
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#<?= $modalName ?>">
-                                        <i class="fas fa-edit fa-sm text-white-50"></i></button>
+                                            <i class="fas fa-edit fa-sm text-white-50"></i></button>
                                         <div class="modal fade" id="<?= $modalName ?>" role="dialog">
                                             <div class="modal-dialog">
                                                 <!-- Modal content-->
@@ -445,40 +485,80 @@ $total = $totalIncome - $totalExpense;
                                                             </br>
                                                             <h6>Account</h6>
                                                             <select name="account">
-                                                                <option <?php if($row['account']=="Cash"){ echo 'selected="selected"'; }?>>Cash</option>
-                                                                <option <?php if($row['account']=="Savings"){ echo 'selected="selected"'; }?>>Savings</option>
-                                                                <option <?php if($row['account']=="Card"){ echo 'selected="selected"'; }?>>Card</option>
+                                                                <option <?php if ($row['account'] == "Cash") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Cash</option>
+                                                                <option <?php if ($row['account'] == "Savings") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Savings</option>
+                                                                <option <?php if ($row['account'] == "Card") {
+                                                            echo 'selected="selected"';
+                                                        } ?>>Card</option>
                                                             </select>
                                                             </br>
                                                             </br>
                                                             <h6>Category</h6>
                                                             <select name="category">
-                                                                <?php
-                                                                if ($row['transaction_type'] == 'Income') {
-                                                                    ?>
-                                                                    <option <?php if($row['category']=="Allowance"){ echo 'selected="selected"'; }?>>Allowance</option>
-                                                                    <option <?php if($row['category']=="Salary"){ echo 'selected="selected"'; }?>>Salary</option>
-                                                                    <option <?php if($row['category']=="Petty cash"){ echo 'selected="selected"'; }?>>Petty cash</option>
-                                                                    <option <?php if($row['category']=="Bonus"){ echo 'selected="selected"'; }?>>Bonus</option>
-                                                                    <option <?php if($row['category']=="Other"){ echo 'selected="selected"'; }?>>Other</option>
-                                                                    <?php
-                                                                } else {
-                                                                    ?>
-                                                                    <option <?php if($row['category']=="Food"){ echo 'selected="selected"'; }?>>Food</option>
-                                                                    <option <?php if($row['category']=="Social Life"){ echo 'selected="selected"'; }?>>Social Life</option>
-                                                                    <option <?php if($row['category']=="Self-Development"){ echo 'selected="selected"'; }?>>Self-Development</option>
-                                                                    <option <?php if($row['category']=="Transportation"){ echo 'selected="selected"'; }?>>Transportation</option>
-                                                                    <option <?php if($row['category']=="Culture"){ echo 'selected="selected"'; }?>>Culture</option>
-                                                                    <option <?php if($row['category']=="Household"){ echo 'selected="selected"'; }?>>Household</option>
-                                                                    <option <?php if($row['category']=="Apparel"){ echo 'selected="selected"'; }?>>Apparel</option>
-                                                                    <option <?php if($row['category']=="Beauty"){ echo 'selected="selected"'; }?>>Beauty</option>
-                                                                    <option <?php if($row['category']=="Health"){ echo 'selected="selected"'; }?>>Health</option>
-                                                                    <option <?php if($row['category']=="Education"){ echo 'selected="selected"'; }?>>Education</option>
-                                                                    <option <?php if($row['category']=="Gift"){ echo 'selected="selected"'; }?>>Gift</option>
-                                                                    <option <?php if($row['category']=="Other"){ echo 'selected="selected"'; }?>>Other</option>
-                                                                    <?php
-                                                                }
-                                                                ?>
+        <?php
+        if ($row['transaction_type'] == 'Income') {
+            ?>
+                                                                    <option <?php if ($row['category'] == "Allowance") {
+                echo 'selected="selected"';
+            } ?>>Allowance</option>
+                                                                    <option <?php if ($row['category'] == "Salary") {
+                echo 'selected="selected"';
+            } ?>>Salary</option>
+                                                                    <option <?php if ($row['category'] == "Petty cash") {
+                echo 'selected="selected"';
+            } ?>>Petty cash</option>
+                                                                    <option <?php if ($row['category'] == "Bonus") {
+                echo 'selected="selected"';
+            } ?>>Bonus</option>
+                                                                    <option <?php if ($row['category'] == "Other") {
+                echo 'selected="selected"';
+            } ?>>Other</option>
+            <?php
+        } else {
+            ?>
+                                                                    <option <?php if ($row['category'] == "Food") {
+                                    echo 'selected="selected"';
+                                } ?>>Food</option>
+                                                                    <option <?php if ($row['category'] == "Social Life") {
+                                    echo 'selected="selected"';
+                                } ?>>Social Life</option>
+                                                                    <option <?php if ($row['category'] == "Self-Development") {
+                                    echo 'selected="selected"';
+                                } ?>>Self-Development</option>
+                                                                    <option <?php if ($row['category'] == "Transportation") {
+                                    echo 'selected="selected"';
+                                } ?>>Transportation</option>
+                                                                    <option <?php if ($row['category'] == "Culture") {
+                                    echo 'selected="selected"';
+                                } ?>>Culture</option>
+                                                                    <option <?php if ($row['category'] == "Household") {
+                                    echo 'selected="selected"';
+                                } ?>>Household</option>
+                                                                    <option <?php if ($row['category'] == "Apparel") {
+                                    echo 'selected="selected"';
+                                } ?>>Apparel</option>
+                                                                    <option <?php if ($row['category'] == "Beauty") {
+                                    echo 'selected="selected"';
+                                } ?>>Beauty</option>
+                                                                    <option <?php if ($row['category'] == "Health") {
+                                    echo 'selected="selected"';
+                                } ?>>Health</option>
+                                                                    <option <?php if ($row['category'] == "Education") {
+                                    echo 'selected="selected"';
+                                } ?>>Education</option>
+                                                                    <option <?php if ($row['category'] == "Gift") {
+                                    echo 'selected="selected"';
+                                } ?>>Gift</option>
+                                                                    <option <?php if ($row['category'] == "Other") {
+                                    echo 'selected="selected"';
+                                } ?>>Other</option>
+            <?php
+        }
+        ?>
                                                             </select>
                                                             </br>
                                                             </br>
@@ -492,11 +572,11 @@ $total = $totalIncome - $totalExpense;
                                                             <input type="text" name="contents" placeholder="Content Details" value="<?= $row['contents'] ?>"/>
                                                             </br>
                                                             </br>
-                                                            
+
                                                             <input type="checkbox" name="remove" value="remove">Remove Image?
                                                             </br>
                                                             </br>
-                                    
+
                                                             <label>Change Image?</label>
                                                             <input type="file" name="image" class="form-control btn">
                                                             </br>
@@ -514,36 +594,36 @@ $total = $totalIncome - $totalExpense;
                                         </div>
 
                                         <a onclick='javascript:return confirm("Are you sure you want to delete?");'
-                                            href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
-                                        <i class="fas fa-trash fa-sm text-white-50"></i></a>
-                                        
-                                        <?php
-                                        if($row['image'] != NULL){
-                                        ?>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#i<?= $modalName ?>">
-                                            <i class="fas fa-camera fa-sm text-white-50"></i></button>
-                                        <div class="modal fade" id="i<?= $modalName ?>" role="dialog">
-                                            <div class="modal-dialog">
-                                                <!-- Modal content-->
-                                                <div class="modal-content" >
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <img style="max-width:100%; max-height:100%;" class="img-responsive" src="img/<?= $row['image'] ?>">
+                                           href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
+                                            <i class="fas fa-trash fa-sm text-white-50"></i></a>
+
+        <?php
+        if ($row['image'] != NULL) {
+            ?>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#i<?= $modalName ?>">
+                                                <i class="fas fa-camera fa-sm text-white-50"></i></button>
+                                            <div class="modal fade" id="i<?= $modalName ?>" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content" >
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img style="max-width:100%; max-height:100%;" class="img-responsive" src="img/<?= $row['image'] ?>">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <?php
-                                        }
-                                        ?>
-                                    
+            <?php
+        }
+        ?>
+
                                     </td>
                                 </tr>
 
-                            <?php } else {
-                                ?>                 
+    <?php } else {
+        ?>                 
                             </tbody>
                         </table>
                     </div>
@@ -564,39 +644,39 @@ $total = $totalIncome - $totalExpense;
 
                                 <tr>
                                     <td>
-                                        <?= $row['category'] ?>
+        <?= $row['category'] ?>
                                     </td>
                                     <td>
-                                        <?= $row['contents'] ?>
+                                                                <?= $row['contents'] ?>
                                     </td>
                                     <td>
-                                        <?= $row['account'] ?>
+                                                                <?= $row['account'] ?>
                                     </td>
 
-                                    <?php
-                                    if ($row['transaction_type'] == 'Income') {
-                                        $edit_type = 'editIncomeBtn';
-                                        ?>
+        <?php
+        if ($row['transaction_type'] == 'Income') {
+            $edit_type = 'editIncomeBtn';
+            ?>
                                         <td width="14%" class="text-primary">
                                             ₱<?= $row['amount'] ?>
                                         </td>
                                         <td>
                                         </td>
-                                        <?php
-                                    } else {
-                                        $edit_type = 'editExpenseBtn';
-                                        ?>
+            <?php
+        } else {
+            $edit_type = 'editExpenseBtn';
+            ?>
                                         <td>
                                         </td>
                                         <td width="14%" class="text-danger">
                                             ₱<?= $row['amount'] ?>
                                         </td>
-                                        <?php
-                                    }
-                                    ?>
+            <?php
+        }
+        ?>
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#<?= $modalName ?>">
-                                        <i class="fas fa-edit fa-sm text-white-50"></i></button>
+                                            <i class="fas fa-edit fa-sm text-white-50"></i></button>
                                         <div class="modal fade" id="<?= $modalName ?>" role="dialog">
                                             <div class="modal-dialog">
                                                 <!-- Modal content-->
@@ -615,40 +695,80 @@ $total = $totalIncome - $totalExpense;
                                                             </br>
                                                             <h6>Account</h6>
                                                             <select name="account">
-                                                                <option <?php if($row['account']=="Cash"){ echo 'selected="selected"'; }?>>Cash</option>
-                                                                <option <?php if($row['account']=="Savings"){ echo 'selected="selected"'; }?>>Savings</option>
-                                                                <option <?php if($row['account']=="Card"){ echo 'selected="selected"'; }?>>Card</option>
+                                                                <option <?php if ($row['account'] == "Cash") {
+                                    echo 'selected="selected"';
+                                } ?>>Cash</option>
+                                                                <option <?php if ($row['account'] == "Savings") {
+                                    echo 'selected="selected"';
+                                } ?>>Savings</option>
+                                                                <option <?php if ($row['account'] == "Card") {
+                                    echo 'selected="selected"';
+                                } ?>>Card</option>
                                                             </select>
                                                             </br>
                                                             </br>
                                                             <h6>Category</h6>
                                                             <select name="category">
-                                                                <?php
-                                                                if ($row['transaction_type'] == 'Income') {
-                                                                    ?>
-                                                                    <option <?php if($row['category']=="Allowance"){ echo 'selected="selected"'; }?>>Allowance</option>
-                                                                    <option <?php if($row['category']=="Salary"){ echo 'selected="selected"'; }?>>Salary</option>
-                                                                    <option <?php if($row['category']=="Petty cash"){ echo 'selected="selected"'; }?>>Petty cash</option>
-                                                                    <option <?php if($row['category']=="Bonus"){ echo 'selected="selected"'; }?>>Bonus</option>
-                                                                    <option <?php if($row['category']=="Other"){ echo 'selected="selected"'; }?>>Other</option>
-                                                                    <?php
-                                                                } else {
-                                                                    ?>
-                                                                    <option <?php if($row['category']=="Food"){ echo 'selected="selected"'; }?>>Food</option>
-                                                                    <option <?php if($row['category']=="Social Life"){ echo 'selected="selected"'; }?>>Social Life</option>
-                                                                    <option <?php if($row['category']=="Self-Development"){ echo 'selected="selected"'; }?>>Self-Development</option>
-                                                                    <option <?php if($row['category']=="Transportation"){ echo 'selected="selected"'; }?>>Transportation</option>
-                                                                    <option <?php if($row['category']=="Culture"){ echo 'selected="selected"'; }?>>Culture</option>
-                                                                    <option <?php if($row['category']=="Household"){ echo 'selected="selected"'; }?>>Household</option>
-                                                                    <option <?php if($row['category']=="Apparel"){ echo 'selected="selected"'; }?>>Apparel</option>
-                                                                    <option <?php if($row['category']=="Beauty"){ echo 'selected="selected"'; }?>>Beauty</option>
-                                                                    <option <?php if($row['category']=="Health"){ echo 'selected="selected"'; }?>>Health</option>
-                                                                    <option <?php if($row['category']=="Education"){ echo 'selected="selected"'; }?>>Education</option>
-                                                                    <option <?php if($row['category']=="Gift"){ echo 'selected="selected"'; }?>>Gift</option>
-                                                                    <option <?php if($row['category']=="Other"){ echo 'selected="selected"'; }?>>Other</option>
-                                                                    <?php
-                                                                }
-                                                                ?>
+                                        <?php
+                                        if ($row['transaction_type'] == 'Income') {
+                                            ?>
+                                                                    <option <?php if ($row['category'] == "Allowance") {
+                                                echo 'selected="selected"';
+                                            } ?>>Allowance</option>
+                                                                    <option <?php if ($row['category'] == "Salary") {
+                            echo 'selected="selected"';
+                        } ?>>Salary</option>
+                                                                    <option <?php if ($row['category'] == "Petty cash") {
+                            echo 'selected="selected"';
+                        } ?>>Petty cash</option>
+                                                                    <option <?php if ($row['category'] == "Bonus") {
+                            echo 'selected="selected"';
+                        } ?>>Bonus</option>
+                                                                    <option <?php if ($row['category'] == "Other") {
+                echo 'selected="selected"';
+            } ?>>Other</option>
+            <?php
+        } else {
+            ?>
+                                                                    <option <?php if ($row['category'] == "Food") {
+                echo 'selected="selected"';
+            } ?>>Food</option>
+                                                                    <option <?php if ($row['category'] == "Social Life") {
+                echo 'selected="selected"';
+            } ?>>Social Life</option>
+                                                                    <option <?php if ($row['category'] == "Self-Development") {
+                echo 'selected="selected"';
+            } ?>>Self-Development</option>
+                                                                    <option <?php if ($row['category'] == "Transportation") {
+                echo 'selected="selected"';
+            } ?>>Transportation</option>
+                                                                    <option <?php if ($row['category'] == "Culture") {
+                echo 'selected="selected"';
+            } ?>>Culture</option>
+                                                                    <option <?php if ($row['category'] == "Household") {
+                echo 'selected="selected"';
+            } ?>>Household</option>
+                                                                    <option <?php if ($row['category'] == "Apparel") {
+                echo 'selected="selected"';
+            } ?>>Apparel</option>
+                                                                    <option <?php if ($row['category'] == "Beauty") {
+                echo 'selected="selected"';
+            } ?>>Beauty</option>
+                                                                    <option <?php if ($row['category'] == "Health") {
+                echo 'selected="selected"';
+            } ?>>Health</option>
+                                                                    <option <?php if ($row['category'] == "Education") {
+                echo 'selected="selected"';
+            } ?>>Education</option>
+                                                                    <option <?php if ($row['category'] == "Gift") {
+                echo 'selected="selected"';
+            } ?>>Gift</option>
+                                                                    <option <?php if ($row['category'] == "Other") {
+                echo 'selected="selected"';
+            } ?>>Other</option>
+            <?php
+        }
+        ?>
                                                             </select>
                                                             </br>
                                                             </br>
@@ -662,11 +782,11 @@ $total = $totalIncome - $totalExpense;
                                                             <input type="text" name="contents" placeholder="Content Details" value="<?= $row['contents'] ?>"/>
                                                             </br>
                                                             </br>
-                                                            
+
                                                             <input type="checkbox" name="remove" value="remove">Remove Image?
                                                             </br>
                                                             </br>
-                                    
+
                                                             <label>Change Image?</label>
                                                             <input type="file" name="image" class="form-control btn">
                                                             </br>
@@ -684,46 +804,46 @@ $total = $totalIncome - $totalExpense;
                                         </div>
 
                                         <a onclick='javascript:return confirm("Are you sure you want to delete?");'
-                                            href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
-                                        <i class="fas fa-trash fa-sm text-white-50"></i></a>
-                                        
-                                        <?php
-                                        if($row['image'] != NULL){
-                                        ?>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#i<?= $modalName ?>">
-                                            <i class="fas fa-camera fa-sm text-white-50"></i></button>
-                                        <div class="modal fade" id="i<?= $modalName ?>" role="dialog">
-                                            <div class="modal-dialog">
-                                                <!-- Modal content-->
-                                                <div class="modal-content" >
-                                                    <div class="modal-header">
-                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <img style="max-width:100%; max-height:100%;" class="img-responsive" src="img/<?= $row['image'] ?>">
+                                           href="TransactionDelete.php?trans_id=<?= $row['transaction_id'] ?>" class="btn btn-danger">
+                                            <i class="fas fa-trash fa-sm text-white-50"></i></a>
+
+        <?php
+        if ($row['image'] != NULL) {
+            ?>
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#i<?= $modalName ?>">
+                                                <i class="fas fa-camera fa-sm text-white-50"></i></button>
+                                            <div class="modal fade" id="i<?= $modalName ?>" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <!-- Modal content-->
+                                                    <div class="modal-content" >
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img style="max-width:100%; max-height:100%;" class="img-responsive" src="img/<?= $row['image'] ?>">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <?php
-                                        }
-                                        ?>
-                                    
+            <?php
+        }
+        ?>
+
                                     </td>
                                 </tr>
 
-                                <?php
-                            } $prevday = $day;
+        <?php
+    } $prevday = $day;
 
-                            if ($ctr == $query->num_rows) {
-                                ?>
+    if ($ctr == $query->num_rows) {
+        ?>
                             </tbody>
                         </table>
                     </div>
-                    <?php
-                }
-            endwhile;
-            ?>
+        <?php
+    }
+endwhile;
+?>
 
         </div>
     </div>
@@ -733,7 +853,7 @@ $total = $totalIncome - $totalExpense;
 
     <button type="button" class="d-none d-sm-inline-block btn btn-lg btn-success shadow-sm" data-toggle="modal" data-target="#myModal">
         <i class="fas fa-plus fa-sm text-white-50"></i> Create new transaction</button>
-    
+
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -805,12 +925,12 @@ $total = $totalIncome - $totalExpense;
                                     <input type="text" name="contents" placeholder="Content Details"/>
                                     </br>
                                     </br>
-                                    
+
                                     <label>Add Image</label>
                                     <input type="file" name="image" class="form-control btn">
                                     </br>
                                     </br>
-                                    
+
                                     <input class="btn btn-primary" type="submit" name="incomeSubmitBtn" value="Save"/>
                                 </form>
                             </div>
@@ -861,7 +981,7 @@ $total = $totalIncome - $totalExpense;
                                     <input type="text" name="contents" placeholder="Content Details"/>
                                     </br>
                                     </br>
-                                    
+
                                     <label>Add Image</label>
                                     <input type="file" name="image" class="form-control btn">
                                     </br>
