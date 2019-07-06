@@ -1,3 +1,9 @@
+<?php
+if($_SESSION['login'] == FALSE){
+    header("Location: login.php");
+}
+?>
+
 <html lang="en">
 
     <head>

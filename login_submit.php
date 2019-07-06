@@ -1,14 +1,12 @@
 <?php
 
 session_start();
-// SUPER GLOBAL ARRAYS
-/*
- * $_GET - GET REQUESTS
- * $_POST- POST REQUESTS
- * $_REQUEST - ALL REQUEST
- * $_SERVER - ALL SERVER INFORMATION   
- * $_SESSION
- *  */
+
+if (empty($_POST['uname'])) {
+    header("Location: login.php");
+}else if($_SESSION['login'] == TRUE){
+    header("Location: Dashboard.php");
+}
 
 require 'dbconnection.php';
 $username = $_POST['uname'];
@@ -16,15 +14,13 @@ $password = $_POST['pword'];
 
 $query = $db->query("SELECT * from accounts where uname = '$username' AND pword = '$password' ") or die($db->error);
 
-if($_POST['uname'] == "admin" && $_POST['pword'] == "admin"){
+if ($_POST['uname'] == "admin" && $_POST['pword'] == "admin") {
     $_SESSION['login'] = TRUE;
     $_SESSION['fname'] = "Administrator";
     $_SESSION['lname'] = "";
-    $_SESSION['id'] = 999;
+    $_SESSION['specialid'] = 999;
     header("Location: AdminPage.php");
-}
-
-else if ($query->num_rows > 0) {
+} else if ($query->num_rows > 0) {
 
     $userinfo = $query->fetch_assoc();
 

@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['login']) == TRUE) {
-    header("Location: Transactions.php");
+    header("Location: Dashboard.php");
 }
 ?>
 
@@ -147,8 +147,11 @@ if (isset($_SESSION['login']) == TRUE) {
                                         <div class="form-label-group">
                                             <input type="password" name="pword" id="inputPassword" class="form-control" placeholder="Password" required>
                                             <label for="inputPassword">Password</label>
-                                           
+
                                         </div>
+                                        <?php
+                                        $_SESSION['login-confirm'] = FALSE;
+                                        ?>
                                         <button class="btn btn-lg btn-primary btn-block btn-login text-uppercase font-weight-bold mb-2" name="login" type="submit">Sign in</button>
                                         <div class="text-center">
                                             <h6>New here?
