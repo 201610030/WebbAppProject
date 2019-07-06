@@ -121,6 +121,8 @@ if ($total != 0) {
 } else {
     $percentage_income = 0;
     $percentage_expense = 0;
+    $income = 0;
+    $expense = 0;
 }
 
 $float_inc = number_format((float) $percentage_income, 2, '.', '');
