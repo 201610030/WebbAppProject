@@ -32,7 +32,7 @@ if ($_SESSION['login'] == TRUE) {
             echo "Mailer Error: " . $mail->ErrorInfo;
         } else {
             $db->query("INSERT into accounts (fname,lname,uname,email,pword,vcode) VALUES ('$fname','$lname','$uname','$email','$pword','$vcode')");
-            echo "<script>alert('Registration Successful!'); location.href='login.php'</script>";
+            echo "<script>alert('Registration Successful! Please Check your Email!'); location.href='login.php'</script>";
         }
     }
 }else{
