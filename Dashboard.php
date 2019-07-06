@@ -32,7 +32,7 @@ $expense_data_social_life_query = $db->query("SELECT SUM(amount) as expense_data
 $expense_data_self_development_query = $db->query("SELECT SUM(amount) as expense_data_self_development from transactions where accounts_id = " . $accounts_id . "  and transaction_type = 'Expense' and category = 'Self Development'");
 $expense_data_transportation_query = $db->query("SELECT SUM(amount) as expense_data_transportation from transactions where accounts_id = " . $accounts_id . "  and transaction_type = 'Expense' and category = 'Transportation'");
 $expense_data_culture_query = $db->query("SELECT SUM(amount) as expense_data_culture from transactions where accounts_id = " . $accounts_id . "  and transaction_type = 'Expense' and category = 'Culture'");
-$expense_data_household_query = $db->query("SELECT SUM(amount) as expense_data_household from transactions where accounts_id = " . $accounts_id . " and transaction_type = 'Expense' and category = 'household'");
+$expense_data_household_query = $db->query("SELECT SUM(amount) as expense_data_household from transactions where accounts_id = " . $accounts_id . " and transaction_type = 'Expense' and category = 'Household'");
 $expense_data_apparel_query = $db->query("SELECT SUM(amount) as expense_data_apparel from transactions where accounts_id =  " . $accounts_id . "  and transaction_type = 'Expense' and category = 'Apparel'");
 $expense_data_beauty_query = $db->query("SELECT SUM(amount) as expense_data_beauty from transactions where accounts_id = " . $accounts_id . "  and transaction_type = 'Expense' and category = 'Beauty'");
 $expense_data_health_query = $db->query("SELECT SUM(amount) as expense_data_health from transactions where accounts_id = " . $accounts_id . "  and transaction_type = 'Expense' and category = 'Health'");
@@ -79,26 +79,26 @@ $slices_expense = json_encode($expense_list);
 
 
 //income
-$income_data_food_query = $db->query("SELECT SUM(amount) as income_data_food from transactions where accounts_id = " . $accounts_id . " and transaction_type = 'Income' and category = 'Food'");
-$income_data_allowance_query = $db->query("SELECT SUM(amount) as income_data_allowance from transactions where accounts_id =  " . $accounts_id . "  and transaction_type = 'Income' and category = 'Allowance'");
+$income_data_allowance_query = $db->query("SELECT SUM(amount) as income_data_allowance from transactions where accounts_id = " . $accounts_id . " and transaction_type = 'Income' and category = 'Allowance'");
+$income_data_salary_query = $db->query("SELECT SUM(amount) as income_data_salary from transactions where accounts_id =  " . $accounts_id . "  and transaction_type = 'Income' and category = 'Salary'");
 $income_data_pettycash_query = $db->query("SELECT SUM(amount) as income_data_pettycash from transactions where accounts_id = " . $accounts_id . "  and transaction_type = 'Income' and category = 'Petty cash'");
 $income_data_bonus_query = $db->query("SELECT SUM(amount) as income_data_bonus from transactions where accounts_id = " . $accounts_id . "  and transaction_type = 'Income' and category = 'Bonus'");
 $income_data_other_query = $db->query("SELECT SUM(amount) as income_data_other from transactions where accounts_id = " . $accounts_id . "  and transaction_type = 'Income' and category = 'Other'");
 
-$slice1_income = $income_data_food_query->fetch_assoc();
-$slice2_income = $income_data_allowance_query->fetch_assoc();
+$slice1_income = $income_data_allowance_query->fetch_assoc();
+$slice2_income = $income_data_salary_query->fetch_assoc();
 $slice3_income = $income_data_pettycash_query->fetch_assoc();
 $slice4_income = $income_data_bonus_query->fetch_assoc();
 $slice5_income = $income_data_other_query->fetch_assoc();
 
-$income_data_food = $slice1_income['income_data_food'];
-$income_data_allowance = $slice2_income['income_data_allowance'];
+$income_data_allowance = $slice1_income['income_data_allowance'];
+$income_data_salary = $slice2_income['income_data_salary'];
 $income_data_pettycash = $slice3_income['income_data_pettycash'];
 $income_data_bonus = $slice4_income['income_data_bonus'];
 $income_data_other = $slice5_income['income_data_other'];
 
 
-$income_list = array($income_data_food, $income_data_allowance, $income_data_pettycash, $income_data_bonus, $income_data_other);
+$income_list = array($income_data_allowance, $income_data_salary, $income_data_pettycash, $income_data_bonus, $income_data_other);
 $slices_income = json_encode($income_list);
 
 
