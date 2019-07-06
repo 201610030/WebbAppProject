@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION['login']) == FALSE) {
     header("Location: login.php");
 }else if(isset($_SESSION['specialid']) != 999){
-    header("Location: Transactions.php");
+    header("Location: Dashboard.php");
 }
 
 $title = "Admin Page";
