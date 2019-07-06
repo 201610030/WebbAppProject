@@ -26,7 +26,7 @@ if (isset($_SESSION['specialid']) == 999) {
         echo "<script>alert('Password Does Not Match'); location.href='signup.php'</script>";
     } else {
         $mail->Subject = "Registration";
-        $mail->Body = "<h2>Hello $fname, <br><br>Please verify your account by clicking the link below: </h2>"
+        $mail->Body = "<h2>Hello $fname, <br><br>Please verify and log in your account by clicking the link below: </h2>"
                 . "<a href='localhost/WebbAppProject/verifyuser.php?vcode=$vcode'>CLICK HERE</a>"; //Content of Message : to set the content of email message
 
         $mail->AddAddress($email);

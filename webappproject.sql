@@ -29,7 +29,6 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `accounts` (
-  `id` int(11) NOT NULL,
   `uname` varchar(30) NOT NULL,
   `pword` varchar(30) NOT NULL,
   `fname` varchar(30) NOT NULL,
