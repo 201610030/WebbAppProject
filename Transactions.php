@@ -46,8 +46,10 @@ if (isset($_SESSION['month'])) {
 
         if ($month == 'January') {
             $year = $_SESSION['year'] + 1;
+            $_SESSION['year'] = $year;
         } else {
             $year = $_SESSION['year'];
+            $_SESSION['year'] = $year;
         }
     } else {
         switch ($month) {
@@ -79,8 +81,10 @@ if (isset($_SESSION['month'])) {
 
         if ($month == 'December') {
             $year = $_SESSION['year'] - 1;
+            $_SESSION['year'] = $year;
         } else {
             $year = $_SESSION['year'];
+            $_SESSION['year'] = $year;
         }
     }
 } else {
