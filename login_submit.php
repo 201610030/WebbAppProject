@@ -10,8 +10,8 @@ if (isset($_SESSION['specialid']) == 999) {
 }
 
 require 'dbconnection.php';
-$username = $_POST['uname'];
-$password = $_POST['pword'];
+$username = strip_tags($_POST['uname']);
+$password = strip_tags($_POST['pword']);
 
 $query = $db->query("SELECT * from accounts where uname = '$username' AND pword = '$password' ") or die($db->error);
 
