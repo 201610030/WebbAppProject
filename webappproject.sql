@@ -106,21 +106,6 @@ INSERT INTO `transactions` (`transaction_id`, `accounts_id`, `month`, `day`, `ye
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transfer`
---
-
-CREATE TABLE `transfer` (
-  `accounts_id` int(11) NOT NULL,
-  `month` int(11) NOT NULL,
-  `day` int(11) NOT NULL,
-  `year` int(11) NOT NULL,
-  `account_from` text NOT NULL,
-  `account_to` text NOT NULL,
-  `contents` varchar(100) NOT NULL,
-  `amount` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
 -- Indexes for dumped tables
 --
 

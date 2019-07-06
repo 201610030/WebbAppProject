@@ -47,9 +47,6 @@ if ($_POST['date'] == NULL) {
     } else if (isset($_POST['expenseSubmitBtn'])) {
         $db->query("INSERT into transactions (accounts_id,month,day,year,account,category,contents,transaction_type,amount,image) VALUES ('$accounts_id','$month','$day','$year','$account','$category','$contents','Expense','$amount','$file_name')") or die($db->error);
         echo "<script>alert('Transaction Success'); location.href='Transactions.php'</script>";
-    } else {
-        $db->query("INSERT into transfer (accounts_id,month,day,year,account_from,account_to,contents,amount) VALUES ('$accounts_id','$month','$day','$year','$account_from','$category_to','$contents','$amount')") or die($db->error);
-        echo "<script>alert('Transaction Success'); location.href='Transactions.php'</script>";
     }
 }
 

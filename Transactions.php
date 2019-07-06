@@ -1006,8 +1006,8 @@ $total = $totalIncome - $totalExpense;
 
                         <ul class="nav nav-tabs">
                             <li><a class="btn btn-primary" data-toggle="tab" href="#Income">Income</a></li>
-                            <li style="margin: auto"><a class="btn btn-danger" data-toggle="tab" href="#Expense">Expense</a></li>
-                            <li><a class="btn btn-info" data-toggle="tab" href="#Transfer">Transfer</a></li>
+                            <li style="margin: auto"><a></a></li>
+                            <li><a class="btn btn-danger" data-toggle="tab" href="#Expense">Expense</a></li>
                         </ul>
 
                         <div class="tab-content" id="tabs">
@@ -1113,48 +1113,6 @@ $total = $totalIncome - $totalExpense;
                                     </br>
 
                                     <input class="btn btn-primary" type="submit" name="expenseSubmitBtn" value="Save"/>
-                                </form>
-                            </div>
-
-                            <!-- TRANSFER TAB -->
-                            <div id="Transfer" class="tab-pane fade">
-                                <form action="TransactionInsert.php" method="POST">
-                                    </br>
-                                    <h2>Transfer</h2>
-                                    <h6>Date</h6>
-                                    <input type="date" name="date">
-                                    </br>
-                                    </br>
-
-                                    <h6>From</h6>
-                                    <select name="account_from">
-                                        <option>Cash</option>
-                                        <option>Savings</option>
-                                        <option>Card</option>
-                                    </select>
-                                    </br>
-                                    </br>
-
-                                    <h6>To</h6>
-                                    <select name="account_to">
-                                        <option>Cash</option>
-                                        <option>Savings</option>
-                                        <option>Card</option>
-                                    </select>
-                                    </br>
-                                    </br>
-
-                                    <h6>Amount</h6>
-                                    <input type="number" step="any" name="amount" placeholder="Enter Amount"/>
-                                    </br>
-                                    </br>
-
-                                    <h6>Contents</h6>
-                                    <input type="text" name="contents" placeholder="Content Details"/>
-                                    </br>
-                                    </br>
-
-                                    <input class="btn btn-primary" type="submit" name="transferSubmitBtn" value="Save"/>
                                 </form>
                             </div>
                         </div>
