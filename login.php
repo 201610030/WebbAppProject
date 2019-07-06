@@ -23,8 +23,9 @@ if (isset($_SESSION['specialid']) == 999) {
             }
 
             .bg-image {
-                background-image: url('img/mountain.jpg');
-                background-size: cover;
+                background-image: url('img/image.png');
+                background-size: auto;
+                background-repeat: no-repeat;
                 background-position: center;
             }
 
